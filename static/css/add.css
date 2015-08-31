@@ -1,0 +1,99 @@
+header{
+    font-size: 1.6em;
+    color: #000;
+    margin-top: 10px;
+}
+header div{
+    /*border: 1px solid red;*/
+    text-align: center;
+}
+hr{
+    clear: both;
+}
+.content ul li{
+    list-style: none;
+    border-bottom: 1px solid #d9d9d9;
+    line-height: 50px;
+    color: #000;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.content ul li div {
+    height: 0px;
+    overflow: hidden;
+}
+@font-face {
+    font-family: "myfirstfont";
+    src: url(../iconfont.woff);
+}
+.myfont{
+    font-family: "myfirstfont";
+    color: #169BD5;
+    font-size: 1.2em;
+    padding-right: 10px;
+}
+.myfont:hover{
+    color: #1173a3;
+}
+textarea{
+    width: 100%;
+    font-size: 0.7em;
+    resize: none;
+    line-height: 1.5;
+    border-radius: 5px;
+}
+select{
+    width: 20%;
+    border-radius: 3px;
+    font-size: 0.7em;
+    height: 35px;
+    outline: none;
+}
+input[type="date"]{
+    width: 25%;
+    border-radius: 3px;
+    font-size: 0.7em;
+    height: 35px;
+}
+.tel{
+    width: 30%;margin-top: 20px
+}
+.site-name{
+    float: left;
+}
+.site-name,.site-tel{
+    width: 20%;
+}
+.site-addr{
+    width: 40%;
+    margin-top: 5px
+}
+.next-step{
+    border-radius: 20px;
+    width: 100px;
+    /*float: right;*/
+}
+footer {
+    width: 100%;
+    position: fixed;
+    bottom: 10px;
+    padding: 0 10px;
+    font-size: 1.3em;
+    background-color: #fff;
+}
+@media (max-width:768px) {
+    select{
+        width:48%;
+    }
+}
+@media (max-width:992px) {
+    input[type="date"]{
+        width: 70%;
+    }
+    .site-name,.site-tel{
+        width: 40%;
+    }
+    .site-addr,.tel{
+        width: 80%;
+    }
+}

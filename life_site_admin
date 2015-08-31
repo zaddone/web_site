@@ -1,0 +1,83 @@
+upstream life_site_api{
+   server 127.0.0.1:8501;
+   #server 127.0.0.1:8502;
+   #server 127.0.0.1:8503;
+   #server 127.0.0.1:8504;
+}
+
+server {
+	listen 80 ;
+	#listen [::]:80;
+
+	root /usr/share/nginx/html;
+	index index.html index.htm;
+
+	server_name manage.xiaorizi.me apitest.xiaorizi.me;
+	access_log /data/log/nginx/life_site_admin/access.log;
+	error_log /data/log/nginx/life_site_admin/error.log;
+
+	location / {
+		uwsgi_pass localhost:7704;
+		include /etc/nginx/uwsgi_params;
+	}
+	location ^~ /api/ {
+		proxy_pass_header Server;
+		proxy_set_header Host $http_host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header REMOTE-HOST $remote_addr;
+		proxy_set_header X-Scheme $scheme;
+		proxy_pass http://life_site_api;
+		#proxy_next_upstream error;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		client_max_body_size 50m;
+		client_body_buffer_size 256k;
+		proxy_connect_timeout 30;
+		proxy_send_timeout 30;
+		proxy_read_timeout 60;
+		proxy_buffer_size 256k;
+		proxy_buffers 4 256k;
+		proxy_busy_buffers_size 256k;
+		proxy_temp_file_write_size 256k;
+		proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+		proxy_max_temp_file_size 128m;
+	
+	}   
+	location /static/ {
+	    alias /data/web/user_center_git/user_center/static/;
+	}
+	
+	location /media/ {
+	    alias /data/web/user_center_git/user_center/media/;
+	}
+
+  	location ~* \.(ico|gif|bmp|jpg|jpeg|png|swf|js|css|mp3|woff|ttf) {
+         root  /data/web/user_center_git/user_center/;
+         expires 30d;
+     }
+}
+
+
+
+# HTTPS server
+#
+#server {
+#	listen 443;
+#	server_name localhost;
+#
+#	root html;
+#	index index.html index.htm;
+#
+#	ssl on;
+#	ssl_certificate cert.pem;
+#	ssl_certificate_key cert.key;
+#
+#	ssl_session_timeout 5m;
+#
+#	ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+#	ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+#	ssl_prefer_server_ciphers on;
+#
+#	location / {
+#		try_files $uri $uri/ =404;
+#	}
+#}

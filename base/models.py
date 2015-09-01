@@ -2,10 +2,7 @@
 from django.db import models
 import ftplib,time,os
 from django.contrib.auth.models import User
-try:
-    from PIL import Image
-except:
-    import Image
+import Image
 
 class storeTag(models.Model):
     ct=(

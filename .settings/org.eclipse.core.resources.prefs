@@ -1,4 +1,6 @@
 eclipse.preferences.version=1
+encoding//base/models.py=utf-8
 encoding//store/models.py=utf-8
+encoding//website/models.py=utf-8
 encoding/<project>=UTF-8
 encoding/api_run.py=utf-8

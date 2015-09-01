@@ -17,7 +17,7 @@ DATABASES = {
         'USER': 'usercenter',
         'PASSWORD': 'ghk*LoY5,;:/?',
         #'HOST': '10.10.59.222',
-        'HOST': '10.10.1.163',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     },
 }

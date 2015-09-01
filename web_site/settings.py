@@ -1,4 +1,4 @@
-# Django settings for user_center project.
+# Django settings for web_site project.
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
 DEBUG = True
@@ -100,10 +100,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'user_center.urls'
+ROOT_URLCONF = 'web_site.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'user_center.wsgi.application'
+WSGI_APPLICATION = 'web_site.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

@@ -1,5 +1,5 @@
 """
-WSGI config for user_center project.
+WSGI config for web_site project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable

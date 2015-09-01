@@ -1,4 +1,4 @@
-# Django settings for user_center project.
+# Django settings for web_site project.
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 import os
 DEBUG = True
@@ -49,7 +49,7 @@ USE_TZ = False
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/var/www/example.com/media/"
 MEDIA_ROOT = os.path.join(os.getcwd(), 'media')
-#MEDIA_ROOT = '/data/web/user_center/media'
+#MEDIA_ROOT = '/data/web/web_site/media'
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://example.com/media/", "http://media.example.com/"
@@ -60,7 +60,7 @@ MEDIA_URL = '/media/'
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
 STATIC_ROOT = os.path.join(os.getcwd(), 'static')
-#STATIC_ROOT = '/data/web/user_center/static'
+#STATIC_ROOT = '/data/web/web_site/static'
 #STATIC_ROOT = '/data/web/life_site/static'
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
@@ -101,10 +101,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'user_center.urls'
+ROOT_URLCONF = 'web_site.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'user_center.wsgi.application'
+WSGI_APPLICATION = 'web_site.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".

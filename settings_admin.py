@@ -13,9 +13,9 @@ DATABASES = {
     'default': {
 
         'ENGINE':'django.db.backends.mysql',
-        'NAME': 'site_data',
-        'USER': 'siteWebUser',
-        'PASSWORD': 'v#*EEhBxnAsPhotcoZgo1<-3q.RT/s4[',
+        'NAME': 'web_site',
+        'USER': 'usercenter',
+        'PASSWORD': 'ghk*LoY5,;:/?',
         #'HOST': '10.10.59.222',
         'HOST': '10.10.1.163',
         'PORT': '3306',

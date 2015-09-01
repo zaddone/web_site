@@ -14,8 +14,8 @@ from update_code.view_sh import viewHandler
 from update_code.view_post import postHandler,showUserPostHandler
 
 define("memcache_ip", default="127.0.0.1:11211", help="memcache ip")
-define("mysql_host", default="10.10.1.163:3306", help="database host")
-define("mysql_database", default="user_center", help="database name")
+define("mysql_host", default="127.0.0.1:3306", help="database host")
+define("mysql_database", default="web_site", help="database name")
 define("mysql_user", default="usercenter", help="database user")
 define("mysql_password", default="ghk*LoY5,;:/?", help="database password")
 

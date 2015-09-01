@@ -6,13 +6,13 @@ upstream life_site_api{
 }
 
 server {
-	listen 80 ;
+	listen 80 default_server;
 	#listen [::]:80;
 
 	root /usr/share/nginx/html;
 	index index.html index.htm;
 
-	server_name manage.xiaorizi.me apitest.xiaorizi.me;
+	server_name localhost manage.xiaorizi.me apitest.xiaorizi.me;
 	access_log /home/oneday/log/nginx/life_site_admin/access.log;
 	error_log /home/oneday/log/nginx/life_site_admin/error.log;
 

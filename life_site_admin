@@ -17,7 +17,7 @@ server {
 	error_log /home/oneday/log/nginx/life_site_admin/error.log;
 
 	location / {
-		uwsgi_pass localhost:7704;
+		uwsgi_pass 127.0.0.1:7704;
 		include /etc/nginx/uwsgi_params;
 	}
 	location ^~ /api/ {

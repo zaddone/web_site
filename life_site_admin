@@ -13,8 +13,8 @@ server {
 	index index.html index.htm;
 
 	server_name manage.xiaorizi.me apitest.xiaorizi.me;
-	access_log /data/log/nginx/life_site_admin/access.log;
-	error_log /data/log/nginx/life_site_admin/error.log;
+	access_log /home/oneday/log/nginx/life_site_admin/access.log;
+	error_log /home/oneday/log/nginx/life_site_admin/error.log;
 
 	location / {
 		uwsgi_pass localhost:7704;
@@ -43,15 +43,15 @@ server {
 	
 	}   
 	location /static/ {
-	    alias /data/web/user_center_git/user_center/static/;
+	    alias /home/oneday/web_site/web_site/static/;
 	}
 	
 	location /media/ {
-	    alias /data/web/user_center_git/user_center/media/;
+	    alias /home/oneday/web_site/web_site/media/;
 	}
 
   	location ~* \.(ico|gif|bmp|jpg|jpeg|png|swf|js|css|mp3|woff|ttf) {
-         root  /data/web/user_center_git/user_center/;
+         root  /home/oneday/web_site/web_site/;
          expires 30d;
      }
 }

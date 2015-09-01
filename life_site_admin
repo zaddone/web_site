@@ -4,7 +4,12 @@ upstream life_site_api{
    #server 127.0.0.1:8503;
    #server 127.0.0.1:8504;
 }
-
+upstream django{
+   server 127.0.0.1:8000;
+   #server 127.0.0.1:8502;
+   #server 127.0.0.1:8503;
+   #server 127.0.0.1:8504;
+}
 server {
 	listen 80 default_server;
 	#listen [::]:80;
@@ -20,6 +25,28 @@ server {
 		uwsgi_pass localhost:7704;
 		include /etc/nginx/uwsgi_params;
 	}
+	location ^~ /django/ {
+			proxy_pass_header Server;
+			proxy_set_header Host $http_host;
+			proxy_set_header X-Real-IP $remote_addr;
+			proxy_set_header REMOTE-HOST $remote_addr;
+			proxy_set_header X-Scheme $scheme;
+			proxy_pass http://django;
+			#proxy_next_upstream error;
+			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+			client_max_body_size 50m;
+			client_body_buffer_size 256k;
+			proxy_connect_timeout 30;
+			proxy_send_timeout 30;
+			proxy_read_timeout 60;
+			proxy_buffer_size 256k;
+			proxy_buffers 4 256k;
+			proxy_busy_buffers_size 256k;
+			proxy_temp_file_write_size 256k;
+			proxy_next_upstream error timeout invalid_header http_500 http_503 http_404;
+			proxy_max_temp_file_size 128m;
+		
+		} 
 	location ^~ /api/ {
 		proxy_pass_header Server;
 		proxy_set_header Host $http_host;

@@ -114,7 +114,7 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = (
     #'suit',
-    'south',
+    #'south',
     'bootstrap3',
     'django_admin_bootstrapped',    
     #'django.contrib.admin',

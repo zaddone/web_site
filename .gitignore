@@ -1,0 +1,6 @@
+/git_pull.sh
+/restart_nginx.sh
+/restart_uwsgi.sh
+/supervisorctl_reload.sh
+/update_file.sh
+/supervisord.sh

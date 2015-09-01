@@ -23,7 +23,7 @@ class storeTag(models.Model):
         db_table = 'store_tag'      
         verbose_name = u'标签词库'
         verbose_name_plural = u'标签词库'
-        app_label='web_site'
+        #app_label='web_site'
 
 
 class storeServer(models.Model): 
@@ -35,7 +35,7 @@ class storeServer(models.Model):
         db_table = 'store_file_server'
         verbose_name = u'资源服务器'
         verbose_name_plural = u'资源服务器'
-        app_label='web_site'
+        #app_label='web_site'
 
 
 class storeFile(models.Model):
@@ -110,7 +110,7 @@ class storeFile(models.Model):
         db_table = 'store_file'
         verbose_name = u'文件'
         verbose_name_plural = u'文件'
-        app_label='web_site'
+        #app_label='web_site'
 
 
 class storeImg(storeFile):
@@ -176,7 +176,7 @@ class storeImg(storeFile):
         db_table = 'store_img'
         verbose_name = u'图片'
         verbose_name_plural = u'图片'
-        app_label='web_site'
+        #app_label='web_site'
 
 
 class storeParagraph(models.Model):
@@ -195,7 +195,7 @@ class storeParagraph(models.Model):
         db_table = 'store_paragraph'
         verbose_name = u'文字段落'
         verbose_name_plural = u'文章段落'
-        app_label='web_site'
+        #app_label='web_site'
 
 
 class storeBase(models.Model):
@@ -222,4 +222,4 @@ class storeBase(models.Model):
     class Meta:
         # managed = False
         db_table='store_base'
-        app_label='web_site'
+        #app_label='web_site'

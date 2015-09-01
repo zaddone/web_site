@@ -101,7 +101,7 @@ class storeProduct(storeBase):
     stock=models.IntegerField(u'库存',default=100)
     stock_d=models.IntegerField(u'出库等待' ,default=0)
      
-    points=models.IntegerField(u'积分',max_length=100,blank=True)
+    points=models.IntegerField(u'积分',blank=True)
     status = models.PositiveSmallIntegerField(u'有效状态',blank=True ,default=1,choices=st )
     type=models.PositiveSmallIntegerField(u'类型',blank=True, default=0,choices=typ )
     content=models.CharField(u'产品描述',max_length=255,blank=True )

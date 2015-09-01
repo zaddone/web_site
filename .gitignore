@@ -4,3 +4,8 @@
 /supervisorctl_reload.sh
 /update_file.sh
 /supervisord.sh
+/media/
+/static/
+/.settings/
+/.project
+/.pydevproject

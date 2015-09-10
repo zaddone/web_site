@@ -1,0 +1,180 @@
+
+.text{
+    max-width:640px;
+    margin:0px auto;
+
+    font-family:Helvetica,Tahoma,Arial,"MicrosoftYaHei","微软雅黑",SimSun,"宋体",STXihei,"华文细黑",Heiti,"黑体",sans-serif;
+    color:#2c3e50;
+    background-color:#f9f9f9;
+}
+.main{
+    padding: 0;
+    margin-top: -10px;
+    FONT-SIZE: 0.975em;
+    margin: 1em auto;
+}
+.title{
+    padding:0;
+    margin-top:-10px;
+    FONT-SIZE:0.975em;
+    letter-spacing:0.18em;
+    margin:1em auto
+}
+
+.title_p{
+    font-size:1.5em!important;
+    font-weight:bold;
+    padding:0px;
+}
+.title_t{
+    padding:0px;
+}
+.container img{
+    max-width: 100%;
+    height: auto !important;
+    vertical-align: baseline !important ;
+}
+.main p
+{
+    letter-spacing:0.1em;
+    line-height:1.7;
+}
+
+.text > .container{
+    padding:0;
+}
+.container>p{
+    line-height:1.9em;
+    word-break:break-word;
+}
+.container img{
+    margin:1em auto;
+    display:block;
+    max-width:100%;
+    height:auto!important;
+    margin-top: 10px;
+}
+.app-div{
+    text-align:center;
+    margin-top:2em;
+}
+.app-diva{
+    display:inline-block;
+    background-color:#fcc746;
+    width:80%;
+    height:2em;
+    text-align:center;
+    line-height:2em;
+    color:#fff;
+    text-decoration:none;
+    border-radius:15px;
+}
+.bottom_banner{
+    width:100%;
+    position:fixed;
+    bottom:-5px;
+    left:0;
+}
+.app_down{
+    width:100%;
+    position:fixed;
+    bottom:0px;
+    left:0;
+}
+table{
+    width:100%!important;
+}
+.rowimg{
+    margin:1em auto;
+    display:block;
+    max-width:100%;
+    height:auto!important;
+}
+.addr{
+    color:#fff;
+    max-width:100%;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    padding:20px 10px 0 10px;
+}
+@media (min-width: 1200px){
+    .container {
+        width: 755px;
+    }
+}
+@media (min-width: 992px){
+    .container {
+        width: 755px;
+    }
+}
+@media (min-width: 768px){
+    .container {
+        width: 755px;
+    }
+}
+body{
+    background: #f9f9f9;
+    font-family:arial,"microsoft yahei",simsun,sans-self;
+}
+.download{
+    padding: 0;
+}
+.download a{
+    position: absolute;
+    top: 48%;
+    left: 76%;
+    width: 20%;
+    height: 30%;
+    text-decoration: none;
+}
+.close{
+    position: absolute;
+    top: 25%;
+    width: 7%;
+    height: 50%;
+}
+.download{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+footer {
+    background: #3E3D3D;
+    padding: 30px 10px 10px 10px;
+    width: 100%;
+    float: left;
+}
+footer ul{
+    padding: 0;
+    /*border: 1px solid red;*/
+}
+footer  ul li{
+    list-style: none;
+    color: #858585;
+    font-size: 14px;
+    line-height: 20px;
+    width: 100%;
+    text-align: left;
+}
+.main p{
+    /*text-indent: 2em;*/
+    font-size: 1em !important ;
+    word-spacing: 3px;
+    text-align: inherit;
+    line-height: 26px !important ;
+    padding: 0 8px !important ;
+    color: #252525 !important ;
+    letter-spacing:inherit;
+    /*font-family: "宋体";*/
+}
+.addr{
+    text-indent: 0em !important ;
+    padding: 20px 10px 0 0px;
+    color: #fff !important;
+    margin-top: 20px;
+}
+.guess .address{
+    color: #fff !important;
+}

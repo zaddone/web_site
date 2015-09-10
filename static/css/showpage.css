@@ -1,0 +1,135 @@
+.eventPage {
+    font-family: Tahoma, Arial, Helvetica, 'Microsoft Yahei', "微软雅黑", SimHei;
+    background-color: #f9f9f9;
+}
+.main {
+    width: 100%;
+}
+a{
+    color: #000;
+    text-decoration: none;
+}
+.navigation{
+    margin-top: 80px;
+}
+.navigation >div{
+    /*border: 1px solid #ff69b4;*/
+}
+.bread_navigation{
+    background: #f0f0f0;
+    font-size: 1.1em;
+    color: #A4A4A4;
+    line-height: 2;
+    padding: 3px 9px;
+}
+.bread_navigation span a{
+    color: #000;
+}
+.p_title{
+    color: #000;
+    margin-top: 30px;
+}
+.p_tag a{
+    color: #828282;
+    font-size: 1.1em;
+}
+.content {
+    padding: 30px 15px;
+}
+.content p{
+    line-height: 1.7;
+    color: #000;
+    font-size: 1.2em;
+}
+.content p img{
+    width: 100% !important ;
+    height: 100% !important;
+    display: block;
+    margin: 20px 0;
+}
+.guess_like {
+    padding-left:25px;
+    /*padding-top: 5%;*/
+    /*border: 1px solid red;*/
+    height: auto;
+    position: absolute;
+    top: 150px;
+}
+.guess_head{
+    line-height: 2;
+    border-bottom:3px solid #000;
+    margin-bottom: 30px;
+
+    color: #000;
+}
+.guess_list {
+    border: 1px solid #ececec;
+    margin-top: 15px;
+}
+.guess_list>.gues{
+    /*border: 1px solid #ff69b4;*/
+    padding:11px 2px 0px 8px;
+    /*line-height: .7;*/
+}
+.guess_title{
+    font-size: 1.2em;
+    color: #000;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
+.guess_addr {
+    font-size: 1.1em;
+    color: #6A6969;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.weixin1{
+    width: 100%;
+    height:auto;
+    border: 1px solid #ececec;
+    background:#fff url("../images/weixin1.png") no-repeat 100% 0;
+    color:#5C5C5C;
+    font-size: 1.3em;
+    padding: 17px 0;
+}
+.weixin1>span{
+    color: #000;
+    line-height: 1.5;
+    font-size: 1.3em;
+}
+.weixin1 img{
+    margin: 10px auto;
+}
+.hot_tag{
+    line-height: 2;
+    font-size: 1.2em;
+    margin-bottom: 50px;
+}
+.top_back{
+    top: 90%;
+}
+.jiathis_style_32x32{
+    float: right;
+    position: relative;
+    top: -40px;
+}
+@media (max-width:992px) {
+    .guess_like {
+        width: 206px;
+    }
+}
+@media (min-width:992px) {
+    .guess_like {
+        width: 256px;
+    }
+}
+@media (min-width:1200px) {
+    .guess_like {
+        width: 317px;
+    }
+}

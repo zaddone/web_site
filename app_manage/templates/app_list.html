@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=2.0, user-scalable=no" />
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/download.css">
+</head>
+<body>
+<div class="content">
+    <ul>
+        {% for li in list %}
+        <li>
+            <div class="list">
+                <img class="list_img" src="{{li.icon}}" alt="">
+            <div class="down_body">
+                <h2>{{li.name}}</h2>
+                <p>{{li.content}}</p>
+            </div>
+                <a href="{{ li.link }}" class="down_btn">下载</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+</body>
+</html>

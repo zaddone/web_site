@@ -1,0 +1,70 @@
+{% extends "showlist.html" %}
+{% block mynav %}
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="http://xiaorizi.me/">发现小店</a></span></div>
+{% endblock %}
+<!--城市列表-->
+{% block mycity %}
+<div class="city_list" >
+    {% if city_list %}
+    <ul class="Domestic" >
+        <li> <a href="/choice/list/" class="all"  style="color: #A7A7A7;font-size: 1.2em;line-height: 2.5;float: right" >全部</a></li>
+        <li class="domestic"><h4><a href="/choice/domestic/" style="color: #A7A7A7"  >国内</a></h4></li>
+        {% for i in city_list.domestic%}
+        <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if Current_city %}class="{% for x in Current_city %}{% if i.id == x.id %}active1{% endif %}{% endfor%}"{% endif %}  >{{i.name}}</a></li>
+        {% endfor %}
+    </ul>
+    <ul>
+        <li class="abroad" ><h4><a href="/choice/abroad/" style="color: #A7A7A7">国外</a></h4></li>
+        {% for i in city_list.abroad%}
+        <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if Current_city %}class="{% for x in Current_city %}{% if i.id == x.id %}active1{% endif %}{% endfor%}"{% endif %}  >{{i.name}}</a></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
+{% block myScript %}
+<script src="/js/jquery.lazyload.min.js"></script>
+<script src="/js/index.js?time={{time}}"></script>
+<script src="/js/showlist.js?time={{time}}"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var isLoad=sessionStorage.getItem("load1");
+        var isLogin=sessionStorage.getItem("find_city1");
+        if(isLoad&&(window.location.pathname=="/choice/")){
+            location.href=isLogin;
+        }else if(window.location.pathname=="/choice/"){
+            $.ajax({
+                type:'get',
+                url :"/find_city/",
+                dataType : 'jsonp',
+                data:{json:1},
+                jsonp:'callback',
+                jsonpCallback:"call",
+                success  : function(data) {
+                    console.log(data);
+                    var cityname=data.city.retData.city;
+                    $(".city_list a").each(function(i){
+                        if(cityname==$($(".city_list a")[i]).html()){
+                            var citytitle=$(".city_list a")[i].href;
+                            i
+                            location.href=citytitle;
+                            sessionStorage.setItem("load1",true);//键值对
+                            sessionStorage.setItem("find_city1",citytitle);//键值对
+                        }
+                    })
+                },
+                error : function() {
+                    alert('fail');
+                }
+            })
+        }
+        if("{{Current_city.0.name}}"=="国内"){
+            $(".domestic a").css({color:"#000"})
+        }else if("{{Current_city.0.name}}"=="国外"){
+            $(".abroad a").css({color:"#000"})
+        }else if("{{Current_city.0.name}}"=="全国"){
+            $(".all").css({color:"#000"})
+        }
+    })
+</script>
+{% endblock %}

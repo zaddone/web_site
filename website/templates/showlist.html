@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block myHead %}
+{% if Show_seo.title %}<title>{{Show_seo.title}}</title>{% else %}<title>{{Current_city.0.name}}特色{{Current_tag.0.name}}小店排行榜_{{Current_city.0.name}}{{Current_tag.0.name}}哪家小店最时尚_小日子</title>{% endif %}
+{% if Show_seo.keywords %}<meta name="keywords" content="{{Show_seo.keywords}}" />{% else %}<meta name="keywords" content="{{Current_city.0.name}},{{Current_tag.0.name}},特色小店,时尚小店,小日子" />{% endif %}
+{% if Show_seo.description %}<meta name="description" content="{{Show_seo.description}}" />{% else %}<meta name="description" content="这里有{{Current_city.0.name}}最有特色的{{Current_tag.0.name}}小店，让你快速了解{{Current_city.0.name}}{{Current_tag.0.name}}哪家小店最时尚，帮助崇尚美好生活的你，过好每一天的小日子。小日子专注于推荐特色生活方式，逛有意思的小店，和有意思的人一起玩儿。" />{% endif %}
+<link rel="shortcut icon" href="/logo.ico">
+{% endblock %}
+
+{% block myBanner %}
+ <div class="home_banner text-center" >
+     <img class="img-responsive" src="/images/faxian_banner.jpg" alt="探寻生活美好的真谛和融入方式" title="小日子美好生活排行榜" >
+     <div>探寻生活美好的真谛和融入方式</div>
+ </div>
+{% endblock %}
+{% block myContainer %}
+<div class="list_menue" >
+    <div class="container " >
+        {% block mynav %}
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="/choice/">精选小店</a></span></div>
+        {% endblock %}
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 city" ><span>城市&nbsp;<img src="/images/bottom.png" alt=""></span> </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 cat" >{% if cat %}<span>分类&nbsp;<img src="/images/bottom.png" alt=""></span>{% endif %}</div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 explorer" ><a href="http://xiaorizi.me/explorer/" target="_blank" rel="nofollow">申请体验师</a></div>
+    </div>
+    <!--城市列表-->
+    {% block mycity %}
+    <div class="city_list" >
+        {% if city_list %}
+        <ul class="Domestic" >
+            <li> <a href="/domestic/" class="all"  >全部> </a></li>
+            <li class="domestic"><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国内</h4></li>
+            {% for i in city_list.domestic%}
+            <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
+            {% endfor %}
+        </ul>
+        <ul class="Abroad">
+            <li> <a href="/abroad/" class="all" >全部> </a></li>
+            <li class="abroad" ><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国外</h4></li>
+            {% for i in city_list.abroad%}
+            <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    {% endblock %}
+    <!--分类列表-->
+    <div class="cat_list" >
+        {% if cat %}
+        {% for i in cat %}
+        <ul>
+            <li> <a href="{{i.url}}" class="all Current_cat"  >全部> </a></li>
+            <li><h4>{{i.title}}</h4></li>
+            <li style="width: 100%;border-bottom:1px solid #E8E8E8;padding-bottom: 10px; "></li>
+            {% for j in i.tags %}
+            <li class="tags"><a name="tagid" title="{{j.name}}" href="{{j.url}}" {% if j.cur %}class="active1"{% endif %}  >{{j.name}}</a></li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+        {% endif %}
+    </div>
+</div>
+     <!--列表-->
+<div class="all_list" >
+<div id="listContent" class="container">
+    <p style="font-size: 1.1em">
+        {% if Current_city %}
+        <span class="city_name" style="padding-right: 8px">{{Current_city.0.name}}</span>
+        {% endif %}
+        {% if Current_cat %}
+        <span class="cat_name" >{{Current_cat.0.title}}</span>
+        {% endif %}
+        {% if Current_tag %}
+        {% for i in Current_tag %}
+        <span class="cat_name" >{{i.name}}</span>
+        {% endfor %}
+        {% endif %}
+    </p>
+    {% if list%}
+    {% for i in list %}
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 listDiv" >
+        <div class="listMain">
+            <a href="{{i.url}}">
+            <img class="lazy" src="/images/prey.jpg" data-original="{{i.imgs.0}}" width="100%" title="{{i.title}}"  alt="{{i.title}}"/>
+            </a>
+            <div style="height: 106px"  >
+            <a href="{{i.url}}">
+            <h2 class="list_city_name">{% if cities %}【{{i.city_name}}】{% endif %}{{i.title}}</h2>
+            </a>
+            <p>{{i.address}}</p>
+            </div>
+        </div>
+
+    </div>
+    {% endfor %}
+    {% else %}
+    <div style="height:100px;text-align: center;line-height: 100px">抱歉，没有搜索到你要找的相关内容！</div>
+    {% endif %}
+ <div style="width: 100%;clear: both;"  >
+    <nav  style="text-align: center;">
+  <ul class="pagination">
+  {% for page in pagination %}
+	<li  {% if page.flg %} class="active" {% endif %} >
+      <a href="{{page.url}}" >
+        <span aria-hidden="true">{{page.name}}</span>
+      </a>
+    </li>
+  {% endfor %}
+   
+  </ul>
+  </div>
+  </nav>
+</div>
+    <div class="top_back" ><img src="/images/top.png" alt="回到顶部" title="回到顶部" style="margin-bottom: 15px" ><br>
+        <img class="xrz"  src="/images/erweima.png" alt="小日子公众号" title="扫一扫，关注小日子微信公众号" > </div>
+    <img class="wx img-responsive"  src="/images/wx.png"  alt="小日子公众号" title="扫一扫，关注小日子微信公众号" >
+</div>
+{% endblock %}
+{% block myScript %}
+<script src="/js/jquery.lazyload.min.js"></script>
+<script src="/js/index.js?time={{time}}"></script>
+<script src="/js/showlist.js?time={{time}}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    if("{{Current_city.0.name}}"=="国内"){
+        $(".Domestic .all").css({color:"#000"})
+    }else if("{{Current_city.0.name}}"=="国外"){
+        $(".Abroad .all").css({color:"#000"})
+    }
+    if("{{Current_cat.0.title}}"=="闲时光 · 发现 · 惊喜"){
+        $($(".Current_cat")[0]).css({color:"#000"})
+    }else if("{{Current_cat.0.title}}"=="涨知识 · 分享 · 丰盈"){
+        $($(".Current_cat")[1]).css({color:"#000"})
+    }
+
+})
+</script>
+{% endblock %}

@@ -1,0 +1,10 @@
+/__init__.pyc
+/admin.pyc
+/common.pyc
+/functions.pyc
+/models.pyc
+/old_models.pyc
+/sphinxapi.pyc
+/urls.pyc
+/urls_m.pyc
+/views.pyc

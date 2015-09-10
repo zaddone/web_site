@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <title>小日子官网_小日子APP下载_小日子-感触美好生活</title>
+    <meta name="description" content="小日子，城市精致生活体验站，逛遍全球1000个情怀小店，感触美好生活。“小日子”APP是专注于生活方式的O2O服务平台，立足于文艺情怀，以探店发现为基础思路，以全球多城市布局为核心竞争点，解决社会新兴主流消费群体和移动互联网年轻一代的天生需求购买，帮助商户缓解推广和营销压力。" />
+    <meta name="keywords" content="小日子,小日子APP,小日子下载" />
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        .beijing{
+            width: 100%;
+        }
+        .download{
+            display: block;
+            margin: 5px auto;
+            width: 62%;
+        }
+        #tanchuang{
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,.5);
+            display: none;
+        }
+        #tanchuang div{
+            position: absolute;
+            top: 2%;
+            right:2%;
+            font-size: 1em;
+            padding: 1em;
+            display: inline-block;
+            width: 72%;
+            background-image: url("/images/tanchuang.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+        #tanchuang div p{
+            margin-top: .4em;
+        }
+    </style>
+</head>
+<body>
+
+<img class="beijing" src="/images/black.png" alt="小日子下载"/>
+
+<a id="download">
+<img class="download" src="/images/button.png" alt="小日子下载"/>
+</a>
+
+<div id="tanchuang">
+    <div>
+        <p style="color:#f6614d">请用浏览器打开下载：</p>
+        <p>1.点击右上角按钮</p>
+        <p>2.选中“<span></span>”即可下载小日子客户端</p>
+    </div>
+</div>
+
+<div style="display:none">
+<div id='down' ios="{{ios}}" 
+ android ="{{android}}"  show="{{show}}">
+</div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?23fa9d2fdd855c8c98d4a024557e4983";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="/js/Download.js"></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block myStyle %}
+<link rel="stylesheet" href="/css/index.css?time={{time}}"/>
+<link rel="stylesheet" href="/css/showhome.css?time={{time}}">
+{% endblock %}
+{% block myHeader %}
+        <header class="app_nav" style="color: #fff" ><a href="http://xiaorizi.me/">< 返回首页</a></header>
+{% endblock %}
+{% block myBanner %}
+        <div class="banner" ><img  class="banner_img"  width="100%"  src="/images/app-banner.jpg" alt="">
+            <div class=" banner_content" >
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 load" >
+                    <img class="img-responsive" width="80%" src="/images/app-logo.png" alt="">
+                    <div class="in_load"  >
+                    <div class="col-lg-6 col-md-6 col-sm-6 hidden-xs  downbtn">
+                    <a class="footer_download downloadAndroid" href="http://pic1.qkan.com/app_file/2015-07-17/c_gw-2.3.0-7.171437127089.apk">iPhone下载</a>
+                    <a class="footer_download downloadIos" href="https://itunes.apple.com/app/apple-store/id962602974?pt=117777698&ct=gw&mt=8">Android下载</a>
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-6   qrDown">
+                    <img class="QRcode img-responsive" width="100%"  src="/images/qrx.png" alt="下载小日子APP" title="小日子官网_小日子APP下载" />
+                    </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 app_show" >
+                    <div id="carousel-example-generic" class="carousel slide(500)" data-ride="carousel " style="width: 70%;margin-left: 20%;" >
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                              <div class="item active">
+                                <img src="/images/1.png" class="img-responsive"  width="92%"  alt="小日子APP" title="小日子APP" >
+                            </div>
+                            <div class="item">
+                                <img src="/images/2.png" class="img-responsive"  width="92%"alt="小日子APP" title="小日子APP">
+                            </div>
+                            <div class="item">
+                                <img src="/images/3.png" class="img-responsive"  width="92%"alt="小日子APP" title="小日子APP">
+                            </div>
+                            <div class="item">
+                                <img src="/images/4.png" class="img-responsive"  width="92%" alt="小日子APP" title="小日子APP">
+                            </div>
+                            <div class="item">
+                                <img src="/images/5.png" class="img-responsive"  width="92%" alt="小日子APP" title="小日子APP">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container des" >
+            <img class="img-responsive center-block" width="44%"  src="/images/wenzi1.png" alt="">
+            <p>偷得浮生半日闲，过自己想要的日子 <br>去有意思的地儿，和有意思的人一起玩儿</p>
+            <ul>
+                <li><img src="/images/for-1.png" width="63%"  alt="探店" title="探店" ><h3>探店</h3><p>咖啡馆、甜品铺、杂货铺、艺术空间、餐吧、书吧、小酒馆、茶坊、生活馆、旅舍</p></li>
+                <li><img src="/images/for-2.png" width="63%" alt="附近" title="附近" ><h3>附近</h3><p>发现身边最美小店 <br>有趣活动 <br>生活处处有惊喜</p></li>
+                <li><img src="/images/for-3.png" width="63%" alt="私信" title="私信" ><h3>私信</h3><p>和有意思的人在一起 <br>变成有意思的人</p></li>
+                <li><img src="/images/for-4.png" width="63%" alt="体验" title="体验" ><h3>体验</h3><p>亲子体验、交流讲座、插花、茶道、煮咖啡、弹琴、作画、刺绣、手作、布艺等手工课程</p></li>
+            </ul>
+        </div>
+        <div class="container-fluid" style="background: #f4f4f4;" >
+            <div class="container cat">
+                <img class="img-responsive center-block" width="52%"  src="/images/wenzi2.png" alt="">
+                <p>一个静谧角落，繁荣处的一个转角 <br>或许你会遇见一个懂你的小店</p>
+                <div class="par_cat"  style="float: left" >
+                <ul>
+                    {% for i in cat %}
+                    {% for j in i.tags %}
+                    <li><a href="{{j.url}}"><img  class="img-responsive center-block" src="{{j.img}}" width="100%" title="{{j.name}}"  alt="{{j.name}}">
+                        <div class="cat_name" >{{j.name}}</div>
+                    </a></li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+                </div>
+            </div>
+        </div>
+        <div class="experience">
+           <div class="apply" ><a  href="/explorer/" target="_blank" rel="nofollow" style="color: #000" >体验师申请</a></div>
+            <p>最好玩的工作：小日子app美好生活体验师招募啦！</p>
+            <p style="font-size: 20px" >成为小日子的美好生活体验师 <br>分享你生活变得美好的小店 <br>拍下美图，写下探店的体验 <br>...</p>
+        </div>
+<div class="top_back" style="opacity: 1" ></div>
+{% endblock %}
+
+{% block myContainer %}
+{% endblock %}
+{% block myScript %}
+<script type="text/javascript" src="/js/app.js?time={{time}}"></script>
+{% endblock %}

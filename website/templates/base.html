@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% load page_nav %}
+{% cityNav %}
+{{request.get_full_path}}
+{% endcityNav %}
+    <meta charset="UTF-8">
+    {% block myHead %}
+    <title>{{Show_seo.title}}</title>
+    <meta name="description" content="{{Show_seo.description}}" />
+    <meta name="keywords" content="{{Show_seo.keywords}}" />
+
+    {% endblock %}
+    <link rel="alternate" media="only screen and(max-width: 640px)" href="http://m.xiaorizi.me{{Show_seo.keywords}}" >
+    <meta name="mobile-agent" http-equiv="mobile-agent" content="format=html5;url=http://m.xiaorizi.me{{Show_seo.keywords}}" />
+    <meta name='test' content="{{Show_seo.keywords}}">
+    <link rel="shortcut icon" href="/logo.ico">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    {% block Msite %}
+
+    <script>
+        var browser = {
+            versions: function() {
+                var u = navigator.userAgent, app = navigator.appVersion;
+                return {//移动终端浏览器版本信息
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/) || !!u.match(/AppleWebKit/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+                    iPhone: u.indexOf('iPhone') > -1 , //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        console.log(browser.versions)
+        if (browser.versions.android || browser.versions.iPhone) {
+            window.location.href="http://m.xiaorizi.me{{request.get_full_path}}";
+        }
+    </script>
+    {% endblock %}
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdn.bootcss.com/Swiper/3.0.8/css/swiper.min.css" rel="stylesheet">
+    {% block myStyle %}
+    <link rel="stylesheet" href="/css/index.css?time={{time}}"/>
+
+    {% endblock %}
+</head>
+{% block myBody %}
+<body>
+{% endblock %}
+   {% block myHeader %}
+<div class="header navbar navbar-fixed-top" >
+<div class="container" style="padding: 0" >
+    <div class="head_logo col-lg-3 col-md-3 col-sm-3 col-xs-12" style="padding: 4px 0;" >
+        <a href="http://xiaorizi.me/"><img src="/images/nav_logo.png"  height="40" title="小日子  逛遍全球的美店" alt="小日子"/></a>
+    </div>
+    <div class="head_list col-lg-5 col-md-5 col-sm-6 col-xs-12 col-lg-offset-4 col-md-offset-4 col-sm-offset-3">
+        <ul>
+            <li><a class="page-header  {% if list %} nav_active {% endif %} {% if more %} nav_active {% endif %}"  href="http://xiaorizi.me/"  >发现</a></li>
+            <li><a class="page-header" href="/app/">APP</a></li>
+            <li><a class="page-header about"  href="/aboutus/" rel="nofollow" >关于</a></li>
+            <li><a class="page-header" target="_blank"  href="/explorer/" rel="nofollow" >体验师</a></li>
+        </ul>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block myBanner %}
+{% endblock %}
+
+{% block myContainer %}
+{% endblock %}
+{% block myFooter %}
+<div class="footer">
+    <div class="container">
+        <!--<div class="col-lg-12 logo">-->
+           <!--<img  src="/images/logo1.jpg"  width="135"  alt="小日子" title="小日子 逛遍全球最美小店"/>| <span>逛遍全球最美小店</span>-->
+        <!--</div>-->
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right: 1px solid #4C4C4C" >
+            <ul>
+                <li><h4>联系我们</h4></li>
+                <li>公司名称：小日子科技成都有限公司</li>
+                <li >地址：成都市高新区天府大道1700号环球中心写字楼E3-1412</li>
+                <li>公关推广：pr@xiaorizi.me</li>
+                <li>店铺合作：partner@xiaorizi.me</li>
+                <li>微信服务号：xiaoriziapp</li>
+            </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #4C4C4C;padding-bottom: 75px">
+            <ul>
+                {% if Show_seo.links %}
+                <li><h4>友情链接</h4></li>
+                {% for li in Show_seo.links %}
+                <li style="display: inline-block;padding: 0 5px" ><a href="{{li.url}}" style="color: #AAA;text-decoration: none;" target="_blank" >{{li.title}}</a></li>
+                {% endfor %}
+                {% else %}
+                <li><h4>友情链接</h4></li>
+                <li class="friend_link" ><a href="http://www.haima.me"  target="_blank" >海马助手</a></li>
+                <li class="friend_link"  ><a href="http://xiazai.zol.com.cn/"  target="_blank" >ZOL手机应用</a></li>
+                <li class="friend_link" ><a href="http://www.downza.cn" target="_blank" >软件之家</a></li>
+                <li class="friend_link" ><a href="http://www.33lc.com/"  target="_blank" >绿茶软件</a></li>
+                <li class="friend_link" ><a href="http://www.cncrk.com/"  target="_blank" >起点软件</a></li>
+                {% endif %}
+            </ul>
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 30px;letter-spacing: 30px" >
+            <a href="http://weibo.com/u/5489094992" target="_blank" ><img src="/images/weibo.png" alt="小日子官微" title="小日子微博" ></a>
+            <img class="weixin"  src="/images/weixin.png" alt="小日子微信" title="小日子微信" >
+            <img class="showQc" src="/images/wx.png" alt="下载小日子APP" title="小日子官网_小日子APP下载" />
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 55px 0 20px 0;" >
+            <p>Copyright &copy; 2015 xiaorizi.me, powered by小日子科技成都有限公司 All Rights Reserved 蜀ICP备15012026号</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="/js/jquery-1.11.3.js?time={{time}}"></script>
+<![endif]-->
+<script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.min.js"></script>
+{% block myScript %}
+
+<script src="/js/index.js?time={{time}}"></script>
+<script type="text/javascript?time={{time}}">
+</script>
+{% endblock %}
+<div style="display:none" >
+	<script>
+
+
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?23fa9d2fdd855c8c98d4a024557e4983";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+</body>
+</html>

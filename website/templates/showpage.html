@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block myHead %}
+{% if Show_seo.title %}<title>{{Show_seo.title}}</title>{% else %}<title>{{ city_name }}{{ venue }}_{{title}}_小日子</title>{% endif %}
+{% if Show_seo.keywords %}<meta name="keywords" content="{{Show_seo.keywords}}" />{% else %}<meta name="keywords" content="{{ venue }},{{ tags }}" />{% endif %}
+{% if Show_seo.description %}<meta name="description" content="{{Show_seo.description}}" />{% else %}<meta name="description" content="{{detail}}小日子为您推荐小店名称，帮助您享受美好生活。" />{% endif %}
+<link rel="shortcut icon" href="/logo.ico">
+{% endblock %}
+{% block myStyle %}
+<link rel="stylesheet" href="/css/index.css?time={{time}}"/>
+<link rel="stylesheet" href="/css/showpage.css?time={{time}}">
+{% endblock %}
+
+
+{% block myBody %}
+<body class="eventPage">
+{% endblock %}
+
+{% block myContainer %}
+
+
+<div class="main" >
+    <div class="container navigation">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 details">
+            <div class="bread_navigation" >你现在所在的位置： <span> <a href="javascript:history.go(-1)" rel="nofollow">发现</a> > <a href="#">{{title}}</a></span></div>
+            <h3 class="p_title">{% if city_name  %}<a target="_blank" href="/{{city_title}}/" >{{city_name}}</a>{% endif %}   {{title}}</h3>
+            <p class="p_tag">
+                {% for ta in tag %}
+                <a target="_blank" href="{{ta.0}}">{{ta.1}}</a>
+                {% endfor %}
+            </p>
+            <div class="jiathis_style_32x32">
+                <span style="float: left;line-height: 2.5" >分享：</span>
+                <a class="jiathis_button_tsina" ></a>
+                <a class="jiathis_button_weixin"></a>
+            </div>
+
+            <div class="content" >
+                <img src="{{imgs.0}}" width="100%" title="{{title}}"  alt="{{title}}" style="margin-bottom: 20px">
+                {{ content.0.1|safe }}
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 guess_like" >
+            <div class="guess_1">
+            <div class="guess_head"><span style="float:right;position: relative;top: 8px;color: #686868;font-size: 1.1em">
+                <a href="{{more_url}}">更多</a></span>
+                <span style="font-size: 1.4em;font-weight: 600;" >猜你喜欢</span> </div>
+            {% for i in more %}
+            <a href="{{i.url}}">
+                <div class="guess_list">
+                    <img class="img-responsive" src="{{i.imgs.0}}" alt="{{i.title}}" title="{{i.title}}" width="100%">
+                    <div class="gues"  >
+                        <a href="{{i.url}}">
+                            <h2 class="list_city_name" style="font-size: 1.2em;width: 100%;margin-bottom: 5px;line-height: 1.3;max-height: none">{% if cities %}【{{i.city_name}}】{% endif %}{{i.title}}</h2>
+                        </a>
+                        <p class="guess_addr " >{{i.address}}</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            </div>
+            <div class="guess_2" >
+            <div class="guess_head" style="font-size: 1.4em;font-weight: 600;margin-top: 50px">大家都在看</div>
+            <div class="hot_tag" >
+                {% for i in hot_tag %}
+                <a href="{{i.url}}">{{i.name}}</a>/
+                {% endfor %}
+            </div>
+            <div class="weixin1 text-center" >
+                <span>快扫我</span><br>
+                关注小日子微信
+                <img class="img-responsive center-block" src="/images/wx.png" alt="小日子微信" title="小日子微信"  width="60%" >
+                逛遍全球最美小店
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<div class="top_back" ><img src="/images/top.png" alt="回到顶部" title="回到顶部" ></div>
+
+{% endblock %}
+{% block myScript %}
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<script src="/js/index.js?time={{time}}"></script>
+<script src="/js/showpage.js?time={{time}}"></script>
+{% endblock %}

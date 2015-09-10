@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block myStyle %}
+<link rel="stylesheet" href="/css/index.css?time={{time}}"/>
+<link rel="stylesheet" href="/css/aboutus.css?time={{time}}"/>
+{% endblock %}
+{% block myContainer %}
+        <div class="container content">
+                <h1>关于小日子</h1>
+                <h3>网上生活服务平台</h3>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 " >
+                <p class="page-header1"/>
+                <div class="about_us row" >
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" ><img width="75%" class="center-block" src="/images/icon.png" alt="小日子_发现最美小店" title="小日子_发现最美小店"></div>
+                    <div class="col-lg-9 col-md-3 col-sm-9 col-xs-9 introduce">小日子专注于推荐特色生活方式，逛有意思的小店，和有意思的人一起玩儿包含：烘焙料理，书画乐器，茶道花艺，手作定制，私厨赏味，
+                    观演看剧等各种生活乐趣。邀你一起来感触美好生活的真谛，并探寻着融入方式。希望通过传递生活中的那些美好，让每个人都能找到自己想要的生活姿态，过上自己想要的小日子。</div>
+                </div>
+                <p class="page-header1"/>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3" style="padding: 20px 0">
+                    <ul>
+                        <li >公司名称：小日子科技成都有限公司</li>
+                        <li>地址：成都市高新区天府大道1700号环球中心写字楼E3-1412 </li>
+                        <li>公关推广：pr@xiaorizi.me</li>
+                        <li>店铺合作：partner@xiaorizi.me</li>
+                        <li>微信客服号：xiaoriziapp</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 ">
+                <div class="weixin1 text-center" >
+                    <span>快扫我</span><br>
+                    关注小日子微信
+                    <img class="img-responsive center-block" src="/images/wx.png" alt="小日子微信公众号" title="小日子公众号"  width="60%" >
+                    <p style="letter-spacing: 5px">逛遍全球最美小店</p>
+                </div>
+            </div>
+        </div>
+<div class="top_back"></div>
+{% endblock %}

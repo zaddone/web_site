@@ -81,7 +81,7 @@ def get_one_data(_date=date.today(),city_id=None,new=False):
     date_str = datetime.strftime(_date, '%Y%m%d')
     key_showtime = '%s%s' % (date_str,str(city_id).replace(' ', ''))
     showtime_list = cache.get(key_showtime)
-    new=1
+    #new=1
     if not showtime_list or new:    
         showtime_list=[]    
         fe = feelnum.objects.filter(showtime =_date).order_by('-feelnum','id')\
@@ -290,7 +290,7 @@ def get_site_event(event_id,detail=False,new=False):
     '''
     get format data to  web page 
     '''
-    new=1
+    #new=1
     keyname = 'event_site_%s_%s' % (event_id,detail)
     res  = cache.get(keyname) 
     if not res or new:
@@ -433,7 +433,7 @@ def get_tag_event(tagid=None,cityid=None,catid=None,page=1,perpage=20,new=False)
         keyname = 'tag_home_%s_%s_%s' % ( str(tagid).replace(' ',''),str(catid).replace(' ','')\
                                                  ,str(cityid).replace(' ','') )
     _list = cache.get(keyname)
-    new=True
+    #new=True
     if not _list or new:
         
         

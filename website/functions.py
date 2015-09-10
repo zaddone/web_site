@@ -123,7 +123,7 @@ def getCityNameByCity(request):
     req=urllib2.Request(locApiUrl)
     req.add_header('Content-Type', 'text/html; charset=utf-8')    
     req.add_header('apikey', '7041fb9f4922e5b76465d132da83bab6')
-
+    
     
     try:
         rp = urllib2.urlopen(req,timeout=5).read()
@@ -136,9 +136,9 @@ def getCityNameByCity(request):
             city = content.get('city',False)
             if city:
                 return city
-        return False
+        return ip
     except:
-        return False
+        return ip
 
 
 def return_get_arr(url='/',nowCity=[],query=None):

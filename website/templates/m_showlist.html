@@ -53,7 +53,7 @@
     {% if list%}
     {% for i in list %}
     <div class="listContent" >
-        <a href="/page-{{ i.id }}.html">
+        <a href="{{i.url}}">
             <img src="{{i.imgs.0}}" width="100%"  alt="{{i.tag}}" title="{{i.title}}" />
             <div class="listTiele " style="text-align: left" >
                 <h4>{{i.title}}</h4>
@@ -98,10 +98,10 @@
     $(".city").click(function (){
         var _html=("<ul class='Domestic' >" +
                 "<li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.2em;margin-bottom: 10px' >国内城市</li>" +
-                "{% for i in city_list.domestic %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if Current_city %}class='{% for x in Current_city %}{% if i.id == x.id %}active{% endif %}{% endfor%}'{% endif %}>{{i.name}}</a></li>{% endfor %}</ul>" +
+                "{% for i in city_list.domestic %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if i.cur %}class='active'{% endif %} >{{i.name}}</a></li>{% endfor %}</ul>" +
                 "<ul class='Domestic' style='clear: both' >" +
                 "<li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.2em;margin-bottom: 10px' >国外城市</li>" +
-                "{% for i in city_list.abroad %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if Current_city %}class='{% for x in Current_city %}{% if i.id == x.id %}active{% endif %}{% endfor%}'{% endif %} >{{i.name}}</a></li>{% endfor %}</ul>")
+                "{% for i in city_list.abroad %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if i.cur %}class='active'{% endif %} >{{i.name}}</a></li>{% endfor %}</ul>")
         var li = $(_html);
         if($(".c-list").text()==li.text()){
             $("#navigationSp").css({height:"45px"})
@@ -121,7 +121,7 @@
         var a=$(".download>img").css("height");
         var _html=("<div class='tag_list'>{% for i in cat %}<ul class='Domestic' style='clear: both;border-bottom: 1px solid rgba(224, 224, 224, 0)' >" +
                 "<li style='width:90%;text-align:left;line-height:2;float: none;padding:5px 5%;color: #000;font-size: 1.2em;' >{{i.title}}</li>" +
-                "{% for j in i.tags %}<li style='width: 25%;font-size: 1em;line-height: 2.5;' ><a  title='{{i.name}}'  href='{{j.url}}' {% if Current_tag %}class='{% for x in Current_tag %}{% if x.id == j.id %}active{% endif %}{% endfor%}'{% endif %}>{{j.name}}</a></li>{% endfor %}</ul>{% endfor %}</div>")
+                "{% for j in i.tags %}<li style='width: 25%;font-size: 1em;line-height: 2.5;' ><a  title='{{i.name}}'  href='{{j.url}}' {% if j.cur %}class='active'{% endif %} >{{j.name}}</a></li>{% endfor %}</ul>{% endfor %}</div>")
         var li = $(_html);
         if($(".c-list").text().trim()==li.text()){
             $(".b_class")[0].src="/images/section_1.png";

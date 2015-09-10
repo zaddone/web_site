@@ -2,21 +2,21 @@
 {% block mynav %}
 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="http://xiaorizi.me/">发现小店</a></span></div>
 {% endblock %}
-<!--城市列表-->
 {% block mycity %}
 <div class="city_list" >
     {% if city_list %}
     <ul class="Domestic" >
-        <li> <a href="/choice/list/" class="all"  style="color: #A7A7A7;font-size: 1.2em;line-height: 2.5;float: right" >全部</a></li>
-        <li class="domestic"><h4><a href="/choice/domestic/" style="color: #A7A7A7"  >国内</a></h4></li>
+        <li> <a href="/choice/domestic/" class="all"  >全部> </a></li>
+        <li class="domestic"><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国内</h4></li>
         {% for i in city_list.domestic%}
-        <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if Current_city %}class="{% for x in Current_city %}{% if i.id == x.id %}active1{% endif %}{% endfor%}"{% endif %}  >{{i.name}}</a></li>
+        <li class="cities"><a title="{{i.name}}"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
         {% endfor %}
     </ul>
-    <ul>
-        <li class="abroad" ><h4><a href="/choice/abroad/" style="color: #A7A7A7">国外</a></h4></li>
+    <ul class="Abroad">
+        <li> <a href="/choice/abroad/" class="all" >全部> </a></li>
+        <li class="abroad" ><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国外</h4></li>
         {% for i in city_list.abroad%}
-        <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if Current_city %}class="{% for x in Current_city %}{% if i.id == x.id %}active1{% endif %}{% endfor%}"{% endif %}  >{{i.name}}</a></li>
+        <li class="cities"><a title="{{i.name}}"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}
@@ -31,6 +31,7 @@
         var isLoad=sessionStorage.getItem("load1");
         var isLogin=sessionStorage.getItem("find_city1");
         if(isLoad&&(window.location.pathname=="/choice/")){
+            console.log(isLogin)
             location.href=isLogin;
         }else if(window.location.pathname=="/choice/"){
             $.ajax({

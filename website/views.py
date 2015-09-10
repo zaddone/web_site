@@ -194,9 +194,25 @@ def get_current_cat_and_tag(cat_id,tag_id,new=False):
         if tag_id:
             for ta in tag_id:
                 try:
-                    data['Current_tag'].append(cat_id_list['tag_id_dict'][int(ta)])
+                    tag_dict=cat_id_list['tag_id_dict'][int(ta)]
+                    data['Current_tag'].append(tag_dict)
+                    if 'cat' in tag_dict:
+                        try:
+                            cat_dict=cat_id_list['cat_id_dict'][int(tag_dict['cat'])]
+                            if data['Current_cat']:
+                                try:
+                                    data['Current_cat'].index(cat_dict)
+                                except:
+                                    data['Current_cat'].append(cat_dict)
+                            else:
+                                data['Current_cat'].append(cat_dict)
+                        except:
+                            pass
+                         
                 except:
                     pass
+                
+
             '''
             if not data['Current_tag']:
                 return False

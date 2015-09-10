@@ -366,6 +366,7 @@ def get_cat_tag(typeid = 6,new=False,ty = 0):
                         'name': tag.name,
                         'img': '',
                         'ev_count': 0,
+                        'cat':cat.id,
                         }
                 
                 try:

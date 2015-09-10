@@ -27,7 +27,7 @@ $("#navigation a").each(function () {
 //获取当前城市
 $.ajax({
     type:'get',
-    url :"/find_city/",
+    url :"http://site.xiaorizi.me/find_city/",
     dataType : 'jsonp',
     data:{json:1},
     jsonp:'callback',

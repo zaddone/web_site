@@ -114,7 +114,7 @@ def getCityNameByCity(request):
     
     if request.META.has_key('HTTP_X_FORWARDED_FOR'):
         ip =  request.META['HTTP_X_FORWARDED_FOR']
-        ip = ip.split(",")[0]
+        #ip = ip.split(",")[0]
     else:
     
         ip = request.META['REMOTE_ADDR']

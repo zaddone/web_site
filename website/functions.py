@@ -111,13 +111,13 @@ def get_json_info(json_str):
 
 
 def getCityNameByCity(request):
-    
+    '''
     if request.META.has_key('HTTP_X_FORWARDED_FOR'):
         ip =  request.META['HTTP_X_FORWARDED_FOR']
         ip = ip.split(",")[0]
     else:
-    
-        ip = request.META['REMOTE_ADDR']
+    '''
+    ip = request.META['REMOTE_ADDR']
     #print 'ip=',ip
     locApiUrl = 'http://apis.baidu.com/apistore/iplookupservice/iplookup?ip=%s'%ip    
     req=urllib2.Request(locApiUrl)

@@ -312,7 +312,7 @@ def life_page(request,query=None,template_name='showpage.html'):
     new=request.GET.get('new',None)
     data = get_site_event(event_id = int(query),detail=True,new=new)
 
-        
+    
     
     data['ad']=request.GET.get('ad',False)
     data['hot_tag']=get_hot_tag()
@@ -331,14 +331,14 @@ def life_page(request,query=None,template_name='showpage.html'):
                 else:
                     arr['tags'] ='%s%s' %( arr['tags'],tag)
             if 'more_url' in arr:
-                arr['more_url']='/%s/' % ('_').join(arr['more_url'])
+                arr['more_url']='/%s/' % ('_').join(arr['more_url'])   
             return arr
         data.update(get_tag_str())
     if 'tags' in data:
         _tags=''.join(data['tags'])
         data['tags']=','.join(data['tags'])
     data['more']= recommend(data['id'], data['city_name'], tags =_tags, new=new )
-    
+    data['more_url'] ='/%s/' % data['city_title']
         
     #return HttpResponse(json.dumps(var), content_type='application/json')
     if request.GET.get('json',False):

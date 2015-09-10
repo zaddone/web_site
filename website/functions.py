@@ -136,9 +136,9 @@ def getCityNameByCity(request):
             city = content.get('city',False)
             if city:
                 return city
-        return ip
+        return {'ip':ip}
     except:
-        return ip
+        return {'ip':ip}
 
 
 def return_get_arr(url='/',nowCity=[],query=None):

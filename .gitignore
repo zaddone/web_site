@@ -2,3 +2,6 @@
 /nginx/
 /sh/
 /uwsgi/
+/.settings/
+/.project
+/.pydevproject

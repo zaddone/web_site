@@ -27,7 +27,7 @@
 
 {% block myBanner %}
  <div class="home_banner text-center" >
-     <img class="img-responsive" src="/images/faxian_banner.jpg" alt="探寻生活美好的真谛和融入方式" title="小日子美好生活排行榜" >
+     <img class="img-responsive" src="/images/faxian_banner.jpg" alt="特色小店" title="有意思的小店" >
      <div>探寻生活美好的真谛和融入方式</div>
  </div>
 {% endblock %}
@@ -35,7 +35,7 @@
 <div class="list_menue" >
     <div class="container " >
         {% block mynav %}
-         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="/choice/">精选小店</a></span></div>
+         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="/choice/" title="精选{{Current_city.0.name}}特色小店" >精选小店</a></span></div>
         {% endblock %}
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 city" ><span>城市&nbsp;<img src="/images/bottom.png" alt=""></span> </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 cat" >{% if cat %}<span>分类&nbsp;<img src="/images/bottom.png" alt=""></span>{% endif %}</div>
@@ -46,17 +46,17 @@
     <div class="city_list" >
         {% if city_list %}
         <ul class="Domestic" >
-            <li> <a href="/domestic/" class="all"  >全部> </a></li>
+            <li> <a href="/domestic/" class="all" title="国内特色小店" >全部> </a></li>
             <li class="domestic"><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国内</h4></li>
             {% for i in city_list.domestic%}
-            <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
+            <li class="cities"><a title="{{i.name}}特色小店"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
             {% endfor %}
         </ul>
         <ul class="Abroad">
-            <li> <a href="/abroad/" class="all" >全部> </a></li>
+            <li> <a href="/abroad/" class="all" title="国外特色小店" >全部> </a></li>
             <li class="abroad" ><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国外</h4></li>
             {% for i in city_list.abroad%}
-            <li class="cities"><a title="{{i.name}}"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
+            <li class="cities"><a title="{{i.name}}特色小店"  href="{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
             {% endfor %}
         </ul>
         {% endif %}
@@ -65,16 +65,22 @@
     <!--分类列表-->
     <div class="cat_list" >
         {% if cat %}
-        {% for i in cat %}
-        <ul>
-            <li> <a href="{{i.url}}" class="all Current_cat"  >全部> </a></li>
-            <li><h4>{{i.title}}</h4></li>
+        <ul class="cat_tag">
+            <li> <a href="{{cat.0.url}}" class="all Current_cat" title="{{Current_city.0.name}}特色小店大全" >全部> </a></li>
+            <li><h4>{{cat.0.title}}</h4></li>
             <li style="width: 100%;border-bottom:1px solid #E8E8E8;padding-bottom: 10px; "></li>
-            {% for j in i.tags %}
-            <li class="tags"><a name="tagid" title="{{j.name}}" href="{{j.url}}" {% if j.cur %}class="active1"{% endif %}  >{{j.name}}</a></li>
+            {% for j in cat.0.tags %}
+            <li class="tags"><a name="tagid" title="{{Current_city.0.name}}特色{{j.name}}" href="{{j.url}}" {% if j.cur %}class="active1"{% endif %}  >{{j.name}}</a></li>
             {% endfor %}
         </ul>
-        {% endfor %}
+        <ul class="cat_tag">
+            <li> <a href="{{cat.1.url}}" class="all Current_cat" title="{{Current_city.0.name}}特色活动大全" >全部> </a></li>
+            <li><h4>{{cat.1.title}}</h4></li>
+            <li style="width: 100%;border-bottom:1px solid #E8E8E8;padding-bottom: 10px; "></li>
+            {% for j in cat.1.tags %}
+            <li class="tags"><a name="tagid" title="{{Current_city.0.name}}特色{{j.name}}活动" href="{{j.url}}" {% if j.cur %}class="active1"{% endif %}  >{{j.name}}</a></li>
+            {% endfor %}
+        </ul>
         {% endif %}
     </div>
 </div>
@@ -99,7 +105,7 @@
     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 listDiv" >
         <div class="listMain">
             <a href="{{i.url}}">
-            <img class="lazy" src="/images/prey.jpg" data-original="{{i.imgs.0}}" width="100%" title="{{i.title}}"  alt="{{i.title}}"/>
+            <img class="lazy" src="/images/prey.jpg" data-original="{{i.imgs.0}}" width="100%" title="{{i.venue}}"  alt="{{i.venue}}"/>
             </a>
             <div style="height: 106px"  >
             <a href="{{i.url}}">
@@ -134,6 +140,52 @@
     <img class="wx img-responsive"  src="/images/wx.png"  alt="小日子公众号" title="扫一扫，关注小日子微信公众号" >
 </div>
 {% endblock %}
+{% block myFooter %}
+<div class="footer">
+    <div class="container">
+        <!--<div class="col-lg-12 logo">-->
+        <!--<img  src="/images/logo1.jpg"  width="135"  alt="小日子" title="小日子 逛遍全球最美小店"/>| <span>逛遍全球最美小店</span>-->
+        <!--</div>-->
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right: 1px solid #4C4C4C" >
+            <ul>
+                <li><h4>联系我们</h4></li>
+                <li>公司名称：小日子科技成都有限公司</li>
+                <li >地址：成都市高新区天府大道1700号环球中心写字楼E3-1412</li>
+                <li>公关推广：pr@xiaorizi.me</li>
+                <li>店铺合作：partner@xiaorizi.me</li>
+                <li>微信服务号：xiaoriziapp</li>
+            </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #4C4C4C;padding-bottom: 75px">
+            <ul class="f_link">
+                <li style="padding-bottom: 4px"><h4><a href="/list/">[热门城市]</a></h4></li>
+                {% if Show_seo.links %}
+                <li><h4>友情链接</h4></li>
+                {% for li in Show_seo.links %}
+                <li style="display: inline-block;padding: 0 5px" ><a href="{{li.url}}" style="color: #AAA;text-decoration: none;" target="_blank" >{{li.title}}</a></li>
+                {% endfor %}
+                {% else %}
+                <li><h4>友情链接</h4></li>
+                <li class="friend_link" ><a href="http://www.haima.me"  target="_blank" >海马助手</a></li>
+                <li class="friend_link"  ><a href="http://xiazai.zol.com.cn/"  target="_blank" >ZOL手机应用</a></li>
+                <li class="friend_link" ><a href="http://www.downza.cn" target="_blank" >软件之家</a></li>
+                <li class="friend_link" ><a href="http://www.33lc.com/"  target="_blank" >绿茶软件</a></li>
+                <li class="friend_link" ><a href="http://www.cncrk.com/"  target="_blank" >起点软件</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 30px;letter-spacing: 30px" >
+            <a href="http://weibo.com/u/5489094992" target="_blank" rel="nofollow" ><img src="/images/weibo.png" alt="小日子官微" title="小日子微博" ></a>
+            <img class="weixin"  src="/images/weixin.png" alt="小日子微信" title="小日子微信" >
+            <img class="showQc" src="/images/wx.png" alt="下载小日子APP" title="小日子官网_小日子APP下载" />
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 55px 0 20px 0;" >
+            <p>Copyright &copy; 2015 xiaorizi.me, powered by小日子科技成都有限公司 All Rights Reserved 蜀ICP备15012026号</p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
 {% block myScript %}
 <script src="/js/jquery.lazyload.min.js"></script>
 <script src="/js/index.js?time={{time}}"></script>
@@ -150,6 +202,11 @@ $(document).ready(function(){
     }else if("{{Current_cat.0.title}}"=="涨知识 · 分享 · 丰盈"){
         $($(".Current_cat")[1]).css({color:"#000"})
     }
+    var a="{{Current_page}}";
+    if(a>1){
+        $(".f_link").html(" <li style='padding-bottom: 4px'><h4><a href='/list/'>[热门城市]</a></h4></li>")
+    }
+
 
 })
 </script>

@@ -98,25 +98,12 @@
             </ul>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #4C4C4C;padding-bottom: 75px">
-            <ul>
-                {% if Show_seo.links %}
-                <li><h4>友情链接</h4></li>
-                {% for li in Show_seo.links %}
-                <li style="display: inline-block;padding: 0 5px" ><a href="{{li.url}}" style="color: #AAA;text-decoration: none;" target="_blank" >{{li.title}}</a></li>
-                {% endfor %}
-                {% else %}
-                <li><h4>友情链接</h4></li>
-                <li class="friend_link" ><a href="http://www.haima.me"  target="_blank" >海马助手</a></li>
-                <li class="friend_link"  ><a href="http://xiazai.zol.com.cn/"  target="_blank" >ZOL手机应用</a></li>
-                <li class="friend_link" ><a href="http://www.downza.cn" target="_blank" >软件之家</a></li>
-                <li class="friend_link" ><a href="http://www.33lc.com/"  target="_blank" >绿茶软件</a></li>
-                <li class="friend_link" ><a href="http://www.cncrk.com/"  target="_blank" >起点软件</a></li>
-                {% endif %}
+            <ul class="f_link">
+                <li style="padding-bottom: 4px"><h4><a href="/list/">[热门城市]</a></h4></li>
             </ul>
-
         </div>
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 30px;letter-spacing: 30px" >
-            <a href="http://weibo.com/u/5489094992" target="_blank" ><img src="/images/weibo.png" alt="小日子官微" title="小日子微博" ></a>
+            <a href="http://weibo.com/u/5489094992" target="_blank" rel="nofollow" ><img src="/images/weibo.png" alt="小日子官微" title="小日子微博" ></a>
             <img class="weixin"  src="/images/weixin.png" alt="小日子微信" title="小日子微信" >
             <img class="showQc" src="/images/wx.png" alt="下载小日子APP" title="小日子官网_小日子APP下载" />
         </div>
@@ -134,11 +121,11 @@
 <script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.min.js"></script>
+
 {% block myScript %}
 
 <script src="/js/index.js?time={{time}}"></script>
-<script type="text/javascript?time={{time}}">
-</script>
+<script type="text/javascript?time={{time}}"></script>
 {% endblock %}
 <div style="display:none" >
 	<script>
@@ -152,7 +139,9 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
 </div>
 
 </body>
+
 </html>

@@ -1,22 +1,22 @@
 {% extends "showlist.html" %}
 {% block mynav %}
-<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="http://xiaorizi.me/">发现小店</a></span></div>
+<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 choiceness" ><span><a href="http://xiaorizi.me/" title="发现更多小店" >发现小店</a></span></div>
 {% endblock %}
 {% block mycity %}
 <div class="city_list" >
     {% if city_list %}
     <ul class="Domestic" >
-        <li> <a href="/choice/domestic/" class="all"  >全部> </a></li>
+        <li> <a href="/choice/domestic/" class="all" title="国内特色精选小店"  >全部> </a></li>
         <li class="domestic"><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国内</h4></li>
         {% for i in city_list.domestic%}
-        <li class="cities"><a title="{{i.name}}"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
+        <li class="cities"><a title="{{i.name}}特色精选小店"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}   >{{i.name}}</a></li>
         {% endfor %}
     </ul>
     <ul class="Abroad">
-        <li> <a href="/choice/abroad/" class="all" >全部> </a></li>
+        <li> <a href="/choice/abroad/" class="all" title="国外特色精选小店" >全部> </a></li>
         <li class="abroad" ><h4 style="border-bottom: 1px solid #E8E8E8;padding-bottom: 10px">国外</h4></li>
         {% for i in city_list.abroad%}
-        <li class="cities"><a title="{{i.name}}"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
+        <li class="cities"><a title="{{i.name}}特色精选小店"  href="/choice{{i.url}}" {% if i.cur %}class="active1"{% endif %}  >{{i.name}}</a></li>
         {% endfor %}
     </ul>
     {% endif %}

@@ -34,11 +34,14 @@
     </script>
 </div>
 <!--//导航-->
-<!--<div class="col-sm-12 col-xs-12 download" >-->
-    <!--<img src="/images/banner.png" class="img-responsive" width="100%"  alt="">-->
-    <!--<div class="close" >&nbsp;</div>-->
-    <!--<a href="http://site.xiaorizi.me/app/download/?show=page">&nbsp;</a>-->
-<!--</div>-->
+{% if ad %}
+{% else%}
+<div class="col-sm-12 col-xs-12 download" >
+    <img src="/images/banner.png" class="img-responsive" width="100%"  alt="">
+    <div class="close" >&nbsp;</div>
+    <a href="http://site.xiaorizi.me/app/download/?show=page">&nbsp;</a>
+</div>
+{% endif%}
 <!--<div class="col-sm-12 col-xs-12" id="navigationSp"  style="height:45px;padding: 0;margin-top:0px;background: #fff;border-bottom: 1px solid #dbdbdb" ><a href="javascript:history.go(-1)"><img src="/images/back_1.png" class="img-responsive" style="position: relative;top: -2px"  width="50"  alt=""></a></div>-->
 <!--详情-->
     <div class="container all" style="padding: 0;width: 100%;overflow: hidden" >
@@ -53,45 +56,50 @@
         </div>
         <div class="main" >
         {{ content.0.1|safe }}
-            <!--<div style="width: 100%;height: 54px;background: #f9f9f9;margin-top: 30px" >-->
-                <!--<h4 style="text-align: right;padding:0;line-height:20px;margin-top: 17px;font-size: 1em;position: relative;left:15px " class="col-sm-6 col-xs-6" >猜你喜欢 </h4>-->
-                <!--<img src="/images/like.png"class="img-responsive col-sm-6 col-xs-6" style="text-align:left;width: 48px;position: relative;top: 7px;left:6px" >-->
-            <!--</div>-->
-            <!--猜你喜欢-->
-        <!--{% if more %}-->
-        <!--{% for m in more %}-->
-        <!--<div class="guess"  style=" border: 1px solid rgba(170, 170, 170, 0.31);margin:0 8px 5px ;">-->
-            <!--<a href="/page-{{m.id}}.html">-->
-            <!--<div style="position: relative;">-->
-                <!--<img class="img-responsive" width="100%" src="{{ m.imgs.0 }}" style="margin: 0px" alt="">-->
-                <!--<div style=" position: absolute;bottom: 0px;left: 0px;width: 100%;height: 50px;line-height: 50px;background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.23)));">-->
-                    <!--<p class='addr address'>{{ m.address }}</p>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--</a>-->
-            <!--<a href="{{ m.url }}" style="display:block;margin:15px 0;padding:0 10px;color: #000;text-decoration: none; font-size: 17px;  max-width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ m.title }} | {{m.venue}}</a>-->
-        <!--</div>-->
-        <!--{% endfor %}-->
-        <!--{% endif %}-->
+            {% if ad %}
+            {% else%}
+            <div style="width: 100%;height: 54px;background: #f9f9f9;margin-top: 30px" >
+                <h4 style="text-align: right;padding:0;line-height:20px;margin-top: 17px;font-size: 1em;position: relative;left:15px " class="col-sm-6 col-xs-6" >猜你喜欢 </h4>
+                <img src="/images/like.png"class="img-responsive col-sm-6 col-xs-6" style="text-align:left;width: 48px;position: relative;top: 7px;left:6px" >
+            </div>
+            猜你喜欢
+        {% if more %}
+        {% for m in more %}
+        <div class="guess"  style=" border: 1px solid rgba(170, 170, 170, 0.31);margin:0 8px 5px ;">
+            <a href="/page-{{m.id}}.html">
+            <div style="position: relative;">
+                <img class="img-responsive" width="100%" src="{{ m.imgs.0 }}" style="margin: 0px" alt="">
+                <div style=" position: absolute;bottom: 0px;left: 0px;width: 100%;height: 50px;line-height: 50px;background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(rgba(0, 0, 0, 0.23)));">
+                    <p class='addr address'>{{ m.address }}</p>
+                </div>
+            </div>
+            </a>
+            <a href="{{ m.url }}" style="display:block;margin:15px 0;padding:0 10px;color: #000;text-decoration: none; font-size: 17px;  max-width: 100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{ m.title }} | {{m.venue}}</a>
+        </div>
+        {% endfor %}
+        {% endif %}
+            {% endif%}
     </div>
 <!--footer-->
-        <!--<footer>-->
-            <!--<ul class="col-sm-4 col-xs-4" >-->
-                <!--<li>微信公众号</li>-->
-                <!--<li>公关推广</li>-->
-                <!--<li>联系我们</li>-->
-            <!--</ul>-->
-            <!--<ul class="col-sm-5 col-xs-5" style="border-right:1px solid #4B4B4B" >-->
-                <!--<li>小日子</li>-->
-                <!--<li>Pr@xiaorizi.me</li>-->
-                <!--<li>400-086-5500</li>-->
-            <!--</ul>-->
-            <!--<div class="col-sm-3 col-xs-3"><a href="http://weibo.com/u/5489094992"><img class="img-responsive center-block"  src="/images/weibo .png" width="70%"  alt=""></a></div>-->
-        <!--</footer>-->
-
+        {% if ad %}
+        {% else%}
+        <footer>
+            <ul class="col-sm-4 col-xs-4" >
+                <li>微信公众号</li>
+                <li>公关推广</li>
+                <li>联系我们</li>
+            </ul>
+            <ul class="col-sm-5 col-xs-5" style="border-right:1px solid #4B4B4B" >
+                <li>小日子</li>
+                <li>Pr@xiaorizi.me</li>
+                <li>400-086-5500</li>
+            </ul>
+            <div class="col-sm-3 col-xs-3"><a href="http://weibo.com/u/5489094992"><img class="img-responsive center-block"  src="/images/weibo .png" width="70%"  alt=""></a></div>
+        </footer>
+        {% endif%}
     </div>
 <script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
-<!--<script type="text/javascript" src="/js/page.js"></script>-->
+<script type="text/javascript" src="/js/page.js"></script>
 <script type="text/javascript">
 $(".main p br").replaceWith(" ");
 

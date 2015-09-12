@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>{{venue}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/m_page.css"/>
+</head>
+<body class="dahuodong">
+{% load static %}
+<div style="display:none">
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?23fa9d2fdd855c8c98d4a024557e4983";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+
+</div>
+<div class="container all" style="padding: 0" >
+    <div class="title">
+        <p  class='title_p' style="margin: 10px auto;padding: 0 5px;letter-spacing: 0px" >{{title}}</p>
+        <p class='title_t' style="padding: 0 5px;color: #747474" >
+            {% for ta in tag %}
+            <a target="_blank" href="/t{{ta.0}}/" style="color:#252525" >{{ta.1}}</a>
+            {% endfor %}
+        </p>
+        <img class="img-responsive" width="100%"  src="{{ imgs.0 }}" alt="{{event_name}}">
+    </div>
+    <div class="main" >
+        {{ content.0.1|safe }}
+        <div style="width: 100%;height: 54px;background: #f9f9f9;margin-top: 30px" >
+            <h4 style="text-align: right;padding:0;line-height:20px;margin-top: 17px;font-size: 1em;position: relative;left:15px " class="col-sm-6 col-xs-6" >猜你喜欢 </h4>
+            <img src="/images/like.png"class="img-responsive col-sm-6 col-xs-6" style="text-align:left;width: 48px;position: relative;top: 7px;left:6px" >
+        </div>
+    </div>
+</div>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!--<script type="text/javascript" src="/js/page.js"></script>-->
+<script type="text/javascript">
+    $(".main p br").replaceWith(" ");
+
+</script>
+</body>
+</html>
+
+
+

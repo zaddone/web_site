@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body{
+        background:#F4F4F4;
+        font-family: arial, "microsoft yahei", simsun, sans-self;
+    }
+    a{
+        text-decoration: none !important;
+        color: #000;
+    }
+    .content {
+        background:#fff;
+        margin-top: 60px;
+        padding:20px;
+        /*border: 1px solid red;*/
+    }
+    ul{
+        border-bottom: 2px solid #e6e6e6;
+        float: left;
+        width: 100%;
+        padding: 0;
+    }
+    ul li{
+        list-style: none;
+        float: left;
+        width: 150px;
+        text-align: center;
+        font-size: 1.3em;
+        padding-bottom: 5px;
+        position: relative;
+        top:2px;
+        margin-right: 5px;
+    }
+    .active{
+        border-bottom: 2px solid #828B9F;
+    }
+    .active a{
+        color: #828B9F !important ;
+    }
+    form{
+        padding:60px 10%;
+    }
+    label{
+        /*border: 1px solid red;*/
+        text-align:center;
+        width: 65px;
+        font-size: 1.1em;
+    }
+    input{
+        width: 300px;
+        height: 43px;
+        border:1px solid  #E7E7E7;
+        border-radius: 3px;
+        margin: 10px 0;
+    }
+    .check{
+        background: #828b9f;
+        padding: 10px;
+        color: #fff;
+        font-size: 1.1em;
+        border-radius: 3px;
+        margin-left: 10px;
+    }
+    #sex{
+        width: 80px;
+        height: 40px;
+        padding: 0 19px;
+        border:1px solid  #E7E7E7;
+        color: #939393;
+        font-size: 1.1em;
+    }
+
+</style>
+<body>
+<div class="container content" >
+    <ul>
+        <li ><a href="">小日子用户</a></li>
+        <li  class="active"><a href="">非小日子用户</a></li>
+    </ul>
+    <form action="" class="form-horizontal" >
+      <span style="padding-left: 9px;font-size: 1.2em;color: #828B9F" >注册完成后，你可以使用注册手机号登陆小日子APP</span> <p></p>
+        <label for="">手机号</label><input type="text"/><a href="" class="check" >发送验证码</a><br/>
+        <label for="">动态码</label><input type="text"/><br/>
+        <label for="">昵称</label><input type="text"/><br/>
+        <label for="">密码</label><input type="password"/><br/>
+        <label for="">真实姓名</label><input type="text"/><br/>
+        <label for="">性别</label><select name="sex" id="sex"><option value="1">男</option><option value="2">女</option></select>
+
+    </form>
+</div>
+</body>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="/js/jquery-1.11.3.js?time={{time}}"></script>
+<![endif]-->
+<script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</html>

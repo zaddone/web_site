@@ -268,11 +268,12 @@ def life_list_new(request,query=None):
     
     data['cat'] = html_return_cat(new=new,city_id=data['Current_city'],cat_id=cat_id,tag_id=tag_id)
     #city_id=None
-    if data['Current_cat']:
+    if data['Current_cat'] and not data['Current_tag']:
         for _cat in data['Current_cat']:
             for _tag in _cat['tags']:
                 tag_id.append(str(_tag['id']))
-    cat_id=[]
+    if not cat_id:
+        cat_id=[]
     data['Current_page_count'] = 0
     event_id_list_count =data['count'] = get_tag_event(tagid=tag_id,catid=cat_id,cityid=city_id,new=new,perpage=None)
     if not event_id_list_count or  event_id_list_count < data['Current_page']:

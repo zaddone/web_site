@@ -249,13 +249,6 @@ def life_list_new(request,query=None):
     if not da:
         return data
     data.update(da)
-    # cat change tagid
-
-    
-    
-    
-    
-     
     data.update(get_current_city(city_id = city_id,new=new,city_key=re_key,query_arr=query_arr))
 
     if not data['Current_city']:

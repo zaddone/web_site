@@ -53,16 +53,24 @@ class postHandler(baseHandler):
     def verify_code(self,checkcode,phone):        
         if checkcode and phone:
             ver_code = self.cache.get('verify_%s' % str(phone))
-            if ver_code and 'checkcode' in ver_code:
+            if ver_code and  ver_code.get('checkcode',None):
                 if checkcode.lower() == ver_code['checkcode'].lower():
                     return True                    
         return False
     
     def Handle_signUp(self,**kwargs):
+        _code = 1
+        _msg='Request is successful'
         checkcode =  kwargs.get('checkcode',None)
+        if not checkcode:
+            _code = 0
+            _msg='Not checkcode'
         phone =  kwargs.get('phone',None)
+        if not phone:
+            _code = 0
+            _msg='Not phone'
         if self.verify_code(checkcode,phone):
-            pass
+            key_name='verify_%s' % str(phone)
             
             
 
@@ -94,7 +102,7 @@ class postHandler(baseHandler):
         else:
             user_dict={}
             _code = 0
-            _msg ="key userid not in arguments" 
+            _msg ="key userid not in arguments"
             #self.cache.set(self.make_key(key),post_data,3600*24*7)
         return self.on_response(user_dict,msg=_msg,code=_code)
     def post_function(self,post_data,func='',max_len=10):

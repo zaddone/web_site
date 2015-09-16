@@ -15,7 +15,7 @@ from website.functions import getCityNameByCity,get_city_list,pagination,\
 
 re_key={'domestic':{"name":u"国内","title": "domestic"},
         'abroad':{"name":u"国外","title": "abroad"},
-        'list':{"name":u"全国","title": "list"},
+        'list':{"name":u"全部","title": "list"},
        }
 
 def site_theme_page(request):

@@ -2,6 +2,7 @@
 __author__ = 'zaddone'
 import time
 import tornado.web
+#import re
 from view_base import baseHandler
 class postHandler(baseHandler):
     def get(self):
@@ -21,16 +22,42 @@ class postHandler(baseHandler):
             post_data[key] = value if len(value)>1 else value[0]     
             if type(post_data[key])==int and post_data[key].isdigit():
                 post_data[key]=int(post_data[key])
-        self.write(self.user_post(post_data))
-        self.finish() 
-        
-    def user_post(self,post_data,max_len=10):
+                
+        #self.write(post_data)
+        if 'keys' in post_data:
+            self.write(self.cache_post(post_data,keys=post_data['keys']))
+        else:
+            self.write(post_data)
+        self.finish()
+    
+    @tornado.web.asynchronous
+    def send_check_code(self):
+        phone =  self.get_arguments('phone')
+        #ph=re.compile('^1[358]\d{9}$|^147\d{8}')
+        #ph = re.compile('^\d{13}')
+        if phone:
+ 
+            import random
+            #url = 'http://sdk.entinfo.cn:8060/z_mdsmssend.aspx'
+            checkcode = random.randint(100000,999999)
+            msg = u'您好,您的验证码%s,10分钟内有效,请及时校验【小日子】'%checkcode
+            if self.SendOrderMsg(phone,msg):
+                cache.set(str(phone),str(checkcode),60*10)
+                return HttpResponse(json.dumps({"code":1,"msg":u'验证码发送成功',"phone":phone}), content_type="application/json")
+            else:
+                return HttpResponse(json.dumps({"code":0,"msg":u'验证码发送失败',"phone":phone}), content_type="application/json")
+        else:
+            return HttpResponse(json.dumps({"code":0,"msg":u'手机号为空'}), content_type="application/json") 
+
+
+
+    def cache_post(self,post_data,keys,max_len=10):
         
         _code = 1
         _msg='Request is successful'
-        if 'userid' in post_data:
-            
-            user_key=self.make_key(post_data['userid'])
+        if keys in post_data:
+           
+            user_key=self.make_key(post_data[keys])
             user_dict =self.cache.get(user_key)
             if type(user_dict)!=dict:
                 user_dict={}

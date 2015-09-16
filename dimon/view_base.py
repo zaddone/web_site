@@ -22,7 +22,7 @@ class baseHandler(tornado.web.RequestHandler):
             p['list']=_data
         else:
             p['code']=0
-            p['msg']='Running error to %s' % self.sh_file
+            p['msg']='Running error to not data'
         
             
         return self.return_callback_data(p)
@@ -38,6 +38,7 @@ class baseHandler(tornado.web.RequestHandler):
     def db(self):
         return self.application.db
     
+    
     @property
     def cache(self):
         return self.application.cache
@@ -46,4 +47,29 @@ class baseHandler(tornado.web.RequestHandler):
         key= re.sub(ur"[^\w]", "", str(key) )
         return key[:64]
 
-        
+
+    def SendOrderMsg(self,phone=None,msg=''):
+        if phone and msg:         
+            import urllib2,urllib,hashlib
+            url = 'http://sdk.entinfo.cn:8060/z_mdsmssend.aspx'
+            
+            SN = 'SDK-SRF-010-00554'
+            m = hashlib.md5()
+            m.update(SN+'85-5C7d-')
+            pwd = m.hexdigest().upper()
+            data = {'sn':SN,
+                        'pwd':pwd,
+                        'mobile':phone,
+                        'content':msg.encode('gb2312'),
+                        }
+            res = urllib2.urlopen(url,urllib.urlencode(data)).read()
+            #return res
+            if int(res) > 0:
+                
+                return True
+            else:
+                #return res
+                return False
+            
+        else:
+            return  False

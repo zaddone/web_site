@@ -278,6 +278,10 @@ def life_list_new(request,query=None):
     return data
 def tag_city_page(request,query=None,template_name='showlist.html'):
     data = life_list_new(request,query)
+    if request.GET.get('cat_tab'):
+        data.update({'cat_tab':True})
+    if request.GET.get('city_tab'):
+        data.update({'city_tab':True})
     '''
     if not data:
         return Http404

@@ -276,6 +276,23 @@ def life_list_new(request,query=None):
     event_id_list = get_tag_event(tagid=tag_id,catid=cat_id,cityid=city_id,page=data['Current_page'],perpage=data['Current_perpage'],new=new)
     data['list']=  [get_site_event(event_id=ev_id,new=new) for ev_id in event_id_list]
     return data
+
+def map(request,query=None,template_name='m_showmap.html'):
+    new=request.GET.get('new',False)
+    data={}
+    if query=='city':
+        data['city_list']=html_return_city(new=new,cat_id=None,tag_id=None,citys=None)
+    elif query=='cat':
+        data['cat'] = html_return_cat(new=new,city_id=None,cat_id=None,tag_id=None)
+    else:
+        data['city_list']=html_return_city(new=new,cat_id=None,tag_id=None,citys=None)
+        data['cat'] = html_return_cat(new=new,city_id=None,cat_id=None,tag_id=None)
+    if request.GET.get('json',False):
+        return return_callback_http(request.GET.get("callback",None),data)
+        #return HttpResponse(json.dumps(data), content_type='application/json')
+    else:
+        
+        return render_to_response(template_name,data,context_instance=RequestContext(request))
 def tag_city_page(request,query=None,template_name='showlist.html'):
     data = life_list_new(request,query)
     if request.GET.get('cat_tab'):

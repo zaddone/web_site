@@ -265,7 +265,7 @@ def life_list_new(request,query=None):
         for _cat in data['Current_cat']:
             for _tag in _cat['tags']:
                 tag_id.append(str(_tag['id']))
-    if not cat_id:
+    if cat_id:
         cat_id=[]
     data['Current_page_count'] = 0
     event_id_list_count =data['count'] = get_tag_event(tagid=tag_id,catid=cat_id,cityid=city_id,new=new,perpage=None)

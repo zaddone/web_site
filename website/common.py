@@ -454,7 +454,7 @@ def get_tag_event(tagid=None,cityid=None,catid=None,page=1,perpage=20,new=False)
 
         if catid:
             #catid = catid.split(',')
-            fns=fns.filter(event__tag__in=catid)
+            fns=fns.filter(event__cat__in=catid)
         if tagid:
             #tagid = tagid.split(',')
             fns=fns.filter(event__tag__in=tagid)

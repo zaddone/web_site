@@ -299,6 +299,9 @@ def tag_city_page(request,query=None,template_name='showlist.html'):
         data.update({'cat_tab':True})
     if request.GET.get('city_tab'):
         data.update({'city_tab':True})
+        
+        
+    data['ad']=request.GET.get('ad',False)
     '''
     if not data:
         return Http404

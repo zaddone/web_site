@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>小日子app {{Current_city.0.name}} {{Current_tag.0.name}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+    <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/list.css?time={{time}}"/>
+</head>
+<script type="text/javascript">
+    window.onload=function(){
+        var isLogin=sessionStorage.getItem("load");
+        if(isLogin){
+            $(".download").css({display:"none"});
+            $(".content").css({marginTop:"45px"})
+        }
+    }
+</script>
+<body>
+<div class="main" style="float: left;overflow: hidden" >
+<!--nav-->
+<header style="width: 100%" >
+<div class="col-sm-12 col-xs-12 download" >
+    <img src="/images/banner.png" class="img-responsive" width="100%">
+    <div class="close" >&nbsp;</div>
+    <a href="http://xiaorizi.me/app/download/?show=page">&nbsp;</a>
+</div>
+<div id="navigationSp" style="border-bottom: 1px solid  rgba(215,215,215,0.77)" >
+    <div id="navigation">
+        <div class="city" ><span class="b_city" >{% if Current_city.0.name %}{{Current_city.0.name}}{% else %}选择城市{% endif %}</span>
+        <img width="50" style="float: left;margin: 2px 0 0 -20px"   src="/images/city_1.png" ></div>
+        {% if Current_tag %}<span>{{Current_tag.0.name}}</span>{% else %}{% endif %}
+
+        <img src="/images/section_1.png" class="b_class" />
+
+    </div>
+    <div class="c-list" style="clear: both;position: relative;top: -10px;border-bottom: 1px solid rgba(224, 224, 224, 0.78);border-top: 1px solid rgba(224, 224, 224, 0.78)"  >
+        <ul class='Domestic' >
+        <li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.3em' >国内城市</li>
+        {% for i in city_list.domestic %}
+            <li><a  title='{{i.name}}'  href='{{i.url}}'>{{i.name}}</a></li>
+            {% endfor %}</ul>
+        <ul class='Domestic' style='clear: both' >
+        <li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.3em' >国外城市</li>
+        {% for i in city_list.abroad %}<li><a  title='{{i.name}}'  href='{{i.url}}'>{{i.name}}</a></li>{% endfor %}</ul>
+    </div>
+</div>
+</header>
+<!--list-->
+<div class="content" id="slider" >
+<div id="list_main" >
+    {% if list%}
+    {% for i in list %}
+    <div class="listContent" >
+        <a href="{{i.url}}">
+            <img src="{{i.imgs.0}}" width="100%"  alt="{{i.tag}}" title="{{i.title}}" />
+            <div class="listTiele " style="text-align: left" >
+                <h4>{{i.title}}</h4>
+                <p>{{i.address}}</p>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+    {% else %}
+    <div style="height:100px;text-align: center;line-height: 100px">抱歉，没有搜索你要找的相关内容！</div>
+    {% endif %}
+</div>
+</div>
+<!--分页-->
+<div class="col-md-12 text-center" >
+        <ul class="pagination">
+            {% for page in pagination %}
+            <li {% if page.flg %} class="active" {% endif %}>
+             <a href="{{page.url}}" ><span aria-hidden="true">{{page.name}}</span></a>
+            </li>
+            {% endfor %}
+        </ul>
+</div>
+<!--footer-->
+<footer ">
+    <ul class="col-sm-4 col-xs-4" >
+        <li>服务员</li>
+        <li>公关推广</li>
+        <li>联系我们</li>
+    </ul>
+    <ul class="col-sm-5 col-xs-5" style="border-right:1px solid #4B4B4B" >
+        <li>小日子</li>
+        <li>Pr@xiaorizi.me</li>
+        <li><a class="tel" href="tel:400-086-5500">400-086-5500</a></li>
+    </ul>
+    <div class="col-sm-3 col-xs-3" style="padding-top: 10px" ><a href="http://weibo.com/u/5489094992"><img class="img-responsive center-block"  src="/images/weibo .png" width="70%"  alt=""></a></div>
+</footer>
+</div>
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/m_list.js?time={{time}}"></script>
+<script type="text/javascript">
+    $(".city").click(function (){
+        var _html=("<ul class='Domestic' >" +
+                "<li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.2em;margin-bottom: 10px' >国内城市</li>" +
+                "{% for i in city_list.domestic %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if i.cur %}class='active'{% endif %} >{{i.name}}</a></li>{% endfor %}</ul>" +
+                "<ul class='Domestic' style='clear: both' >" +
+                "<li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;color: #000;font-size: 1.2em;margin-bottom: 10px' >国外城市</li>" +
+                "{% for i in city_list.abroad %}<li style='font-size: 1em;line-height: 2.5;'><a  title='{{i.name}}'  href='{{i.url}}' {% if i.cur %}class='active'{% endif %} >{{i.name}}</a></li>{% endfor %}</ul>")
+        var li = $(_html);
+        if($(".c-list").text()==li.text()){
+            $("#navigationSp").css({height:"45px"})
+            $(".c-list").html("");
+            $("body").css({position:"static"});
+            $(".city img")[0].src="/images/city_1.png";
+        }else{
+            $("#navigationSp").css({height:"auto"})
+            $(".c-list").html(_html);
+            $(".c-list").css({height:H-45+"px"});
+            $("body").css({position:"fixed",top:"0"});
+            $(".city img")[0].src="/images/city_2.png";
+            $(".b_class")[0].src="/images/section_1.png"
+        }
+    })
+    $(".b_class").click(function (){
+        var a=$(".download>img").css("height");
+        var _html=("<div class='tag_list'>{% for i in cat %}<ul class='Domestic' style='clear: both;border-bottom: 1px solid rgba(224, 224, 224, 0)' >" +
+                "<li style='width:90%;text-align:left;line-height:2;float: none;padding:5px 5%;color: #000;font-size: 1.2em;' >{{i.title}}</li>" +
+                "{% for j in i.tags %}<li style='width: 25%;font-size: 1em;line-height: 2.5;' ><a  title='{{i.name}}'  href='{{j.url}}' {% if j.cur %}class='active'{% endif %} >{{j.name}}</a></li>{% endfor %}</ul>{% endfor %}</div>")
+        var li = $(_html);
+        if($(".c-list").text().trim()==li.text()){
+            $(".b_class")[0].src="/images/section_1.png";
+            $("#navigationSp").css({height:"45px"})
+            $(".c-list").html("");
+            $("body").css({position:"static"});
+        }else{
+            $(".b_class")[0].src="/images/section_2.png";
+            $(".city img")[0].src="/images/city_1.png";
+            $("#navigationSp").css({height:"auto"})
+            $(".c-list").html(_html);
+            $(".tag_list").css({height:H-50-parseInt(a)+"px"});
+            $("body").css({position:"fixed",top:"0"});
+        }
+    })
+</script>
+</body>
+</html>

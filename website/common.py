@@ -516,9 +516,14 @@ def theme_page(request):
         var['shops'] = []
 
         remove_vtline = lambda text: text[text.find('|')+1:].lstrip()
-
-        for fe in feelnum.objects.filter(event__theme__in=(themeid,), 
-                        event__isshow_id=1).order_by('-feelnum', '-event__end_time'):
+        _city_id = ( ci.id for ci in theme.city.all())
+        feel = feelnum.objects.filter(event__theme__in=(themeid,), 
+                        event__isshow_id=1).order_by('-feelnum', '-event__end_time')
+        
+        if _city_id:
+            feel = feel.filter(event__city__in=_city_id)
+        
+        for fe in feel:
             ev = fe.event
             _tmp = {}
             _tmp['name'] = remove_vtline(ev.name)

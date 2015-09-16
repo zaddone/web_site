@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=no"/>
+	<title>{{ theme_title }}</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0;
+        }
+        body{
+            line-height: 1.5;
+            padding: 0 10px;
+        }
+        h2{
+            margin: 0.83em 0;
+        }
+        .border_div {
+            position: relative;
+            margin: 21px 0;
+            background-size: 100% 100%;
+        }
+
+        .border_r {
+            display: inline-block;
+            line-height: 30px;
+            border: 1px solid #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 15px;
+            position: relative;
+            top: -8px;
+        }
+
+        .border-top {
+            background-size: 100% 100%;
+            position: relative;
+        }
+        .key span{
+            display: inline-block;
+            background-color: #fff;
+            padding: 0px 10px;
+        }
+        .bottom_banner {
+            width: 100%;
+            position: fixed;
+            bottom: 0px;
+            left: 0;
+        }
+        .bottom_banner img{
+            width: 100%;
+            display: block;
+        }
+        .banner{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div style="max-width: 640px;margin: 0 auto;">
+    <h2 style="font-size: 17px">{{theme_title}}</h2>
+
+    <div class="border-top" style="color:#646464;font-size: 14px">
+       {{theme_intro|safe}}
+    </div>
+    {% for i in shops %}
+    <div>
+        <div class="border_div">
+
+            <p style="font-size: 14px;color: #646464;"><span style="font-size: 17px;color: #000">{{i.addresstitle}} | </span>{{i.name}}</p>
+        </div>
+        <div style="color: #646464;font-size: 14px;">
+            <img src="{{i.img}}" alt="" style="width: 100%;"/>
+
+            <p>{{i.intro}}</p>
+
+            <p  style="margin-top: 10px;"><span style="color: #000;">地址：</span>{{i.address}}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="banner" style="height: 70px;width: 100%;">
+
+</div>
+<div class="bottom_banner banner">
+    <a href="http://xiaorizi.me">
+        <img src="http://pic.huodongjia.com/static/images/app_down.png" class="app_down">
+    </a>
+</div>
+<script>
+    var UA = navigator.userAgent.toLowerCase();
+    console.log(UA.indexOf("micromessenger")!=-1)
+    if(UA.indexOf("micromessenger")!=-1){
+        document.getElementsByClassName("banner")[0].style.display = "block"
+        document.getElementsByClassName("banner")[1].style.display = "block"
+    }
+</script>
+</body>
+</html>

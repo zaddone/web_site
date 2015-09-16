@@ -16,12 +16,14 @@ class baseHandler(tornado.web.RequestHandler):
     def on_response(self, _data,msg='Request is successful',code=1):
         self.set_header("Content-Type", "application/json; charset=UTF-8")
         p={}
+        p['code']=code
+        p['msg']=msg
         if _data:
-            p['code']=1
-            p['msg']=msg
+            
+            #p['msg']=msg
             p['list']=_data
-        else:
-            p['code']=0
+        elif not p['msg']:
+            
             p['msg']='Running error to not data'
         
             

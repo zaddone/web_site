@@ -8,7 +8,8 @@ class postHandler(baseHandler):
     def get(self):
         sign = self.get_arguments('sign') 
         if len(sign)>0 and sign[0]=='up':
-            self.return_style(template='sign_up.html',_data=[])   
+            self.return_style(template='sign_up.html',_data=[])
+         
         else:
             self.return_style(template='sign_in.html',_data=[])   
         #self.render("post_page.html", entries=[])
@@ -24,15 +25,14 @@ class postHandler(baseHandler):
                 post_data[key]=int(post_data[key])
                 
         #self.write(post_data)
-        if 'keys' in post_data:
-            self.write(self.cache_post(post_data,keys=post_data['keys']))
+        if 'func' in post_data:
+            self.write(self.post_function(post_data,keys=post_data['func']))
         else:
             self.write(post_data)
         self.finish()
     
-    @tornado.web.asynchronous
-    def send_check_code(self):
-        phone =  self.get_arguments('phone')
+    def Handle_checkcode(self,**kwargs):
+        phone =  kwargs.get('phone',None)
         #ph=re.compile('^1[358]\d{9}$|^147\d{8}')
         #ph = re.compile('^\d{13}')
         if phone:
@@ -42,22 +42,36 @@ class postHandler(baseHandler):
             checkcode = random.randint(100000,999999)
             msg = u'您好,您的验证码%s,10分钟内有效,请及时校验【小日子】'%checkcode
             if self.SendOrderMsg(phone,msg):
-                cache.set(str(phone),str(checkcode),60*10)
-                return HttpResponse(json.dumps({"code":1,"msg":u'验证码发送成功',"phone":phone}), content_type="application/json")
+                self.cache.set('verify_%s' % str(phone),{'checkcode':str(checkcode)},60*10)
+                return self.on_response({"phone":phone},msg=u'验证码发送成功',code=1)
+                
             else:
-                return HttpResponse(json.dumps({"code":0,"msg":u'验证码发送失败',"phone":phone}), content_type="application/json")
+                return self.on_response({"phone":phone},msg=u'验证码发送失败',code=0)
+                
         else:
-            return HttpResponse(json.dumps({"code":0,"msg":u'手机号为空'}), content_type="application/json") 
+            return self.on_response({},msg=u'手机号为空',code=0)
+    def verify_code(self,checkcode,phone):        
+        if checkcode and phone:
+            ver_code = self.cache.get('verify_%s' % str(phone))
+            if ver_code and 'checkcode' in ver_code:
+                if checkcode.lower() == ver_code['checkcode'].lower():
+                    return True                    
+        return False
+    
+    def Handle_signUp(self,**kwargs):
+        checkcode =  kwargs.get('checkcode',None)
+        phone =  kwargs.get('phone',None)
+        if self.verify_code(checkcode,phone):
+            pass
+            
+            
 
-
-
-    def cache_post(self,post_data,keys,max_len=10):
-        
+    def Handle_userpost(self,**kwargs):
         _code = 1
         _msg='Request is successful'
-        if keys in post_data:
-           
-            user_key=self.make_key(post_data[keys])
+        max_len=10
+        if 'userid' in kwargs:
+            user_key=self.make_key(kwargs['userid'])
             user_dict =self.cache.get(user_key)
             if type(user_dict)!=dict:
                 user_dict={}
@@ -66,7 +80,7 @@ class postHandler(baseHandler):
             if time_s in user_dict:
                 _code = 0
                 _msg = "High frequency operation"
-            user_dict[str(int(time.time()))]=post_data
+            user_dict[str(int(time.time()))]=kwargs
             
             if len(user_dict)>max_len:
                 _code = 0
@@ -77,14 +91,23 @@ class postHandler(baseHandler):
                 except Exception,e:
                     _code = 0
                     _msg =  "memcache err: %s " % str(e)
-            
-            #return user_dict
         else:
             user_dict={}
             _code = 0
             _msg ="key userid not in arguments" 
             #self.cache.set(self.make_key(key),post_data,3600*24*7)
         return self.on_response(user_dict,msg=_msg,code=_code)
+    def post_function(self,post_data,func='',max_len=10):
+        
+        _code = 1
+        _msg='Request is successful'
+        _Handle = getattr(self, 'Handle_%s' % func, None)
+        if _Handle:
+            
+            user_dict=_Handle(post_data)
+            return self.on_response(user_dict,msg=_msg,code=_code)
+        else:
+            self.write(post_data)
 class showUserPostHandler(baseHandler):
     
     @tornado.web.asynchronous

@@ -18,13 +18,13 @@
     {% if city_list %}
     <div class="c-list" style="clear: both;margin-bottom: 10px"  >
         <ul class='Domestic' >
-            <li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
+            <li style='width:100%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
                 <a href="/domestic/" style="color: #000;" >国内城市</a></li>
             {% for i in city_list.domestic %}
             <li><a  title='{{i.name}}'  href='{{i.url}}'>{{i.name}}</a></li>
             {% endfor %}</ul>
         <ul class='Domestic' style='clear: both' >
-            <li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
+            <li style='width:100%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
                 <a href="/abroad/" style="color: #000;" >国外城市</a></li>
             {% for i in city_list.abroad %}<li><a  title='{{i.name}}'  href='{{i.url}}'>{{i.name}}</a></li>{% endfor %}</ul>
     </div>
@@ -33,7 +33,7 @@
     <div class="c-list" style="clear: both;"  >
         {% for i in cat %}
         <ul class='Domestic' >
-            <li style='width:40%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
+            <li style='width:100%;text-align:left;line-height: 1;float: none;padding:5px 5%;font-size: 1.3em' >
                 <a href="{{i.url}}" style="color: #000;" >{{i.title}}</a></li>
             {% for j in i.tags %}
             <li><a  title='{{j.name}}'  href='{{j.url}}'>{{j.name}}</a></li>

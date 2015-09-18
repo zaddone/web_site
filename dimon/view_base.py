@@ -1,6 +1,8 @@
 #coding:utf-8
 __author__ = 'zaddone'
-import json,re
+import json
+import re
+import hashlib
 import tornado.web
 
 
@@ -26,7 +28,6 @@ class baseHandler(tornado.web.RequestHandler):
             
             p['msg']='Running error to not data'
         
-            
         return self.return_callback_data(p)
 
     def return_style(self,template=None,_data={}):
@@ -44,15 +45,19 @@ class baseHandler(tornado.web.RequestHandler):
     @property
     def cache(self):
         return self.application.cache
+    @property
+    def redis_cache(self):
+        return self.application.redis_cache
     
     def make_key(self, key):
         key= re.sub(ur"[^\w]", "", str(key) )
         return key[:64]
 
-
+    @tornado.gen.coroutine
     def SendOrderMsg(self,phone=None,msg=''):
-        if phone and msg:         
-            import urllib2,urllib,hashlib
+        if phone and msg:        
+            client = tornado.httpclient.AsyncHTTPClient() 
+            
             url = 'http://sdk.entinfo.cn:8060/z_mdsmssend.aspx'
             
             SN = 'SDK-SRF-010-00554'
@@ -64,14 +69,18 @@ class baseHandler(tornado.web.RequestHandler):
                         'mobile':phone,
                         'content':msg.encode('gb2312'),
                         }
-            res = urllib2.urlopen(url,urllib.urlencode(data)).read()
+            #res = urllib2.urlopen(url,urllib.urlencode(data)).read()
+            url = tornado.httputil.url_concat(url, data)
+            res = yield client.fetch(url)
             #return res
             if int(res) > 0:
-                
-                return True
+                raise tornado.gen.Return(True)
+                #return True
             else:
+                raise tornado.gen.Return(False)
                 #return res
-                return False
+                #return False
             
         else:
-            return  False
+            raise tornado.gen.Return(False)
+            #return  False

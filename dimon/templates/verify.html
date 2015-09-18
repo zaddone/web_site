@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+{% block mystyle %}
+<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body{
+        background:#F4F4F4;
+        font-family: arial, "microsoft yahei", simsun, sans-self;
+    }
+    .header{
+        background-color: #fff;
+        width: 100%;
+        padding-left:2%;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .header>div{
+        padding: 10px 0;
+    }
+    .header img{
+        margin: 0;
+    }
+    .head_list ul{
+        margin-bottom: 0;
+        padding-left: 24%;
+    }
+    .head_list ul li{
+        display: inline-block;
+        float: left \9;
+        line-height: 44px;
+        padding: 0px 15px;
+        list-style: none;
+    }
+    .head_list ul li a{
+        color: #858585;
+    }
+    a{
+        text-decoration: none !important ;
+    }
+    .head_list ul li{
+        padding: 0 5px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+    .page-header {
+        padding: 4px 18px;
+        margin: 40px 0 20px;
+        border-bottom: 0px solid #4E3838;
+    }
+    .head_list ul li:hover .page-header{
+        border-bottom: 1px solid #4E3838;
+    }
+    .head_list>ul{
+        border: none;
+    }
+    .nav_active{
+        border-bottom: 1px solid #4E3838;
+        color: #000 !important;
+        font-size: 1.1em;
+    }
+
+    a{
+        text-decoration: none !important;
+        color: #000;
+    }
+    .content {
+        background:#fff;
+        margin-top: 60px;
+        padding:20px;
+        padding-bottom: 200px;
+        border: 1px solid #eeeeee;
+    }
+    ul{
+        border-bottom: 2px solid #e6e6e6;
+        float: left;
+        width: 100%;
+        padding: 0;
+    }
+    .sign_nav li{
+        list-style: none;
+        float: left;
+        width: 150px;
+        text-align: center;
+        font-size: 1.3em;
+        padding-bottom: 5px;
+        position: relative;
+        top:2px;
+        margin-right: 5px;
+    }
+    .active{
+        border-bottom: 2px solid #828B9F;
+    }
+    .active a{
+        color: #828B9F !important ;
+    }
+    form{
+        padding:100px 10%;
+    }
+    label{
+        /*border: 1px solid red;*/
+        text-align:center;
+        width: 65px;
+        font-size: 1.1em;
+    }
+    input{
+        width: 300px;
+        height: 43px;
+        border:1px solid  #E7E7E7;
+        border-radius: 3px;
+        padding-left: 5px;
+    }
+    form .forget_psss{
+        margin-left: 297px;
+        font-size: 1.1em;
+        line-height: 2;
+    }
+    .sub{
+        width: 300px;
+        height: 40px;
+        background:#FF9900;
+        text-align: center;
+        line-height: 40px;
+        border: none;
+        color: #fff;
+        border-radius: 3px;
+        font-size: 1.2em;
+        margin-left: 63px;
+    }
+    .sub:hover{
+        background: #ef9400;
+    }
+    /*footer*/
+    .footer{
+        background-color: #353535;
+        padding: 50px 0;
+        clear:both;
+        padding-bottom: 0;
+    }
+    .footer ul{
+        border: none;
+    }
+    .footer ul li{
+        font-size: 1.1em;
+        color: #aaaaaa;
+        list-style: none;
+        line-height: 1.7;
+    }
+    .footer ul li a{
+        color: #aaaaaa;
+    }
+    .footer p{
+        margin: 0px;
+        color: #696969;
+        font-size: 12px;
+    }
+    .footer span{
+        color: #aaaaaa;
+        border-left: 1px solid #696969;
+        padding-left: 10px;
+        line-height: 40px;
+    }
+    .footer .logo{
+        padding: 15px 0px;
+        margin: 15px 0;
+        border-bottom: 1px solid #3f3f3f;
+    }
+    .footer .container div{
+        /**border: 1px solid red;*/
+        *width: 30%;
+    }
+    .footer .container .text-center{
+        /**border: 1px solid red;*/
+        *width: 100%;
+        *background-color: #353535;
+    }
+    .weixin{
+        cursor: pointer;
+    }
+    .showQc{
+        width: 100px;
+        visibility: hidden;
+        float: right;
+
+    }
+    .friend_link{
+        display: inline-block;padding: 0 5px
+    }
+    .friend_link>a{
+        color: #AAA;text-decoration: none;
+    }
+</style>
+{% end %}
+<body>
+{% block myHeader %}
+<div class="header navbar navbar-fixed-top" >
+    <div class="container" style="padding: 0" >
+        <div class="head_logo col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 4px 0;" >
+            <a href="http://xiaorizi.me/"><img src="/images/nav_logo.png"  height="40" title="小日子  逛遍全球的美店" alt="小日子"/></a>
+        </div>
+        <div class="head_list col-lg-5 col-md-6 col-sm-9 col-xs-9 col-lg-offset-4 col-md-offset-3">
+            <ul>
+                <li><a class="page-header"  href="http://xiaorizi.me/"  >发现</a></li>
+                <li><a class="page-header" href="/app/">APP</a></li>
+                <li><a class="page-header about"  href="/aboutus/" rel="nofollow" >关于</a></li>
+                <li><a class="page-header nav_active" target="_blank"  href="/explorer/" rel="nofollow" >体验师</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% end %}
+{% block mycontainer %}
+<div class="container content" >
+    <ul class="sign_nav" >
+        <li  class="active"><a href="/dimon/post/">小日子用户</a></li>
+        <li><a href="/dimon/post/?sign=up">非小日子用户</a></li>
+    </ul>
+    <form action="" class="form-horizontal"  method="post"  >
+        <label for="phone_number" >手机号</label><input type="text" id="phone_number" name="phone" /><span class="phone_check" style="color: #FF9900;display: none" >&nbsp;请输入正确的手机号码</span><p></p>
+        <label for="user_pass" >验证码</label><input type="text" id="checkcode" name="checkcode"  /><span class="pass_check" style="color: #FF9900;display: none" >&nbsp;请输入密码</span> <p></p>
+        <input type=""   name="keys"  />
+        <button class="sub" type="submit">提交</button>
+    </form>
+</div>
+{% end %}
+{% block myFooter %}
+<div class="footer">
+    <div class="container">
+        <!--<div class="col-lg-12 logo">-->
+        <!--<img  src="/images/logo1.jpg"  width="135"  alt="小日子" title="小日子 逛遍全球最美小店"/>| <span>逛遍全球最美小店</span>-->
+        <!--</div>-->
+        <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="border-right: 1px solid #4C4C4C" >
+            <ul>
+                <li><h4>联系我们</h4></li>
+                <li>公司名称：小日子科技成都有限公司</li>
+                <li >地址：成都市高新区天府大道1700号环球中心写字楼E3-1412</li>
+                <li>公关推广：pr@xiaorizi.me</li>
+                <li>店铺合作：partner@xiaorizi.me</li>
+                <li>微信服务号：xiaoriziapp</li>
+            </ul>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="border-right: 1px solid #4C4C4C;padding-bottom: 75px">
+            <ul class="f_link">
+                <li style="padding-bottom: 4px"><h4><a href="/list/">[热门城市]</a></h4></li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="padding: 30px;letter-spacing: 30px" >
+            <a href="http://weibo.com/u/5489094992" target="_blank" rel="nofollow" ><img src="/images/weibo.png" alt="小日子官微" title="小日子微博" ></a>
+            <img class="weixin"  src="/images/weixin.png" alt="小日子微信" title="小日子微信" >
+            <img class="showQc" src="/images/wx.png" alt="下载小日子APP" title="小日子官网_小日子APP下载" />
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding: 55px 0 20px 0;" >
+            <p>Copyright &copy; 2015 xiaorizi.me, powered by小日子科技成都有限公司 All Rights Reserved 蜀ICP备15012026号</p>
+        </div>
+
+    </div>
+</div>
+{% end %}
+</body>
+{% block script %}
+<script src="//cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+<!--[if lt IE 9]>
+<script src="/js/jquery-1.11.3.js"></script>
+<![endif]-->
+<script src="//cdn.bootcss.com/Swiper/3.0.8/js/swiper.jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% end %}
+{% block myscript%}
+<script type="text/javascript">
+    $("#phone_number").blur(function(){
+        var phone_number=$("#phone_number").val();
+        if(phone_number.match(/0?(13|14|15|18)[0-9]{9}/)){
+            $(".phone_check").hide()
+        }else{
+            $(".phone_check").show()
+        }
+    })
+    $("#user_pass").blur(function(){
+        var user_pass=$("#user_pass").val();
+        if(user_pass==""){
+            $(".pass_check").show()
+        }else{
+            $(".pass_check").hide()
+        }
+    })
+</script>
+{% end %}
+</html>

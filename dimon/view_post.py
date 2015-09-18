@@ -1,20 +1,26 @@
 #coding:utf-8
 __author__ = 'zaddone'
 import time
+import random
 import tornado.web
+import tornadoredis
 #import re
 from view_base import baseHandler
+c = tornadoredis.Client()
 class postHandler(baseHandler):
     def get(self):
         sign = self.get_arguments('sign') 
-        if len(sign)>0 and sign[0]=='up':
-            self.return_style(template='sign_up.html',_data=[])
-         
-        else:
-            self.return_style(template='sign_in.html',_data=[])   
+        if len(sign)>0:
+            if sign[0]=='up':
+                self.return_style(template='sign_up.html',_data=[])
+            elif  sign[0]=='verify':
+                self.return_style(template='verify.html',_data=[])
+        self.return_style(template='sign_in.html',_data=[])   
         #self.render("post_page.html", entries=[])
         
-    @tornado.web.asynchronous
+    #@tornado.web.asynchronous
+    #@tornado.gen.engine
+    @tornado.gen.coroutine
     def post(self):
         self.set_header("Content-Type", "text/plain")
         post_data = {}
@@ -23,40 +29,48 @@ class postHandler(baseHandler):
             post_data[key] = value if len(value)>1 else value[0]     
             if type(post_data[key])==int and post_data[key].isdigit():
                 post_data[key]=int(post_data[key])
-                
+        
+        self.write(self.Handle_checkcode(post_data))
         #self.write(post_data)
+        '''
         if 'func' in post_data:
             self.write(self.post_function(post_data,keys=post_data['func']))
         else:
             self.write(post_data)
         self.finish()
+        '''
     
+    @tornado.gen.coroutine
     def Handle_checkcode(self,**kwargs):
         phone =  kwargs.get('phone',None)
         #ph=re.compile('^1[358]\d{9}$|^147\d{8}')
         #ph = re.compile('^\d{13}')
         if phone:
- 
-            import random
-            #url = 'http://sdk.entinfo.cn:8060/z_mdsmssend.aspx'
+
             checkcode = random.randint(100000,999999)
             msg = u'您好,您的验证码%s,10分钟内有效,请及时校验【小日子】'%checkcode
-            if self.SendOrderMsg(phone,msg):
-                self.cache.set('verify_%s' % str(phone),{'checkcode':str(checkcode)},60*10)
-                return self.on_response({"phone":phone},msg=u'验证码发送成功',code=1)
+            sns_send = yield self.SendOrderMsg(phone,msg)
+            if sns_send:
+                #foo = yield tornado.gen.Task(self.redis_cache.get, 'foo')
+                ver = yield tornado.gen.Task(self.redis_cache.set, 'verify_%s' % str(phone),{'checkcode':str(checkcode)},60*10)
+                #self.cache.set('verify_%s' % str(phone),{'checkcode':str(checkcode)},60*10)
+                if ver:
+                    raise tornado.gen.Return(self.on_response({"phone":phone},msg=u'验证码发送成功',code=1))
                 
-            else:
-                return self.on_response({"phone":phone},msg=u'验证码发送失败',code=0)
+            #else:
+            raise tornado.gen.Return(self.on_response({"phone":phone},msg=u'验证码发送失败',code=0))
                 
         else:
-            return self.on_response({},msg=u'手机号为空',code=0)
+            raise tornado.gen.Return(self.on_response({},msg=u'手机号为空',code=0))
     def verify_code(self,checkcode,phone):        
         if checkcode and phone:
             key_name='verify_%s' % str(phone)
-            ver_code = self.cache.get(key_name)
+            ver_code = yield tornado.gen.Task(self.redis_cache.get, key_name)
+            #ver_code = self.cache.get(key_name)
             if ver_code and  ver_code.get('checkcode',None):
                 if checkcode.lower() == ver_code['checkcode'].lower():
                     self.cache.delete(key_name)
+                    c.delete()
                     return True                    
         return False
     

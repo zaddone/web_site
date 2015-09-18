@@ -8,6 +8,7 @@ import tornado.ioloop
 import tornado.options
 import torndb
 import memcache
+import tornadoredis
 
 from tornado.options import define, options
 
@@ -36,7 +37,9 @@ class Application(tornado.web.Application):
             debug=True,
         )
         tornado.web.Application.__init__(self, handlers, **settings)
-        
+        self.CONNECTION_POOL = tornadoredis.ConnectionPool(max_connections=500,
+                                              wait_for_available=True)
+        self.redis_cache = tornadoredis.Client(connection_pool=self.CONNECTION_POOL)
         self.cache = memcache.Client([options.memcache_ip])
         self.db = torndb.Connection(
             host=options.mysql_host, database=options.mysql_database,

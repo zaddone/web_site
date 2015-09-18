@@ -52,28 +52,46 @@ class postHandler(baseHandler):
             return self.on_response({},msg=u'手机号为空',code=0)
     def verify_code(self,checkcode,phone):        
         if checkcode and phone:
-            ver_code = self.cache.get('verify_%s' % str(phone))
+            key_name='verify_%s' % str(phone)
+            ver_code = self.cache.get(key_name)
             if ver_code and  ver_code.get('checkcode',None):
                 if checkcode.lower() == ver_code['checkcode'].lower():
+                    self.cache.delete(key_name)
                     return True                    
         return False
     
     def Handle_signUp(self,**kwargs):
-        _code = 1
-        _msg='Request is successful'
-        checkcode =  kwargs.get('checkcode',None)
+
+        key_val={}
+        checkcode =  kwargs.pop('checkcode')
+        
         if not checkcode:
-            _code = 0
-            _msg='Not checkcode'
+            return self.on_response(key_val,msg='Not checkcode',code=0)
+        
         phone =  kwargs.get('phone',None)
         if not phone:
-            _code = 0
-            _msg='Not phone'
+            return self.on_response(key_val,msg='Not phone',code=0)
+        
         if self.verify_code(checkcode,phone):
-            key_name='verify_%s' % str(phone)
+            key_name='signup_%s' % str(phone)
+            key_name_list='signup_list'
+            key_val_list =self.cache.get(key_name_list)
+            if not key_val_list:
+                key_val_list={}
             
-            
-
+            key_val_list[key_name]=str(int(time.time()))
+            '''
+            key_val =self.cache.get(key_name)
+            if key_val:
+                _code = 0
+                _msg='Data modification'
+            '''
+            self.cache.set(key_name_list,key_val_list,3600*24*30)
+            self.cache.set(key_name,kwargs,3600*24*30)
+            return self.on_response(key_val,msg='Request is successful',code=0)
+        
+        return self.on_response(key_val,msg='Request is fail',code=0)
+        
     def Handle_userpost(self,**kwargs):
         _code = 1
         _msg='Request is successful'

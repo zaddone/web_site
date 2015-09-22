@@ -1,0 +1,513 @@
+{% extends "sign_in.html" %}
+{% block mystyle %}
+<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    body{
+        background:#F4F4F4;
+        font-family: arial, "microsoft yahei", simsun, sans-self;
+    }
+    .header{
+        background-color: #fff;
+        width: 100%;
+        padding-left:2%;
+        border-bottom: 1px solid #E0E0E0;
+    }
+    .header>div{
+        padding: 10px 0;
+    }
+    .header img{
+        margin: 0;
+    }
+    .head_list ul{
+        margin-bottom: 0;
+        padding-left: 24%;
+    }
+    .head_list ul li{
+        display: inline-block;
+        float: left \9;
+        line-height: 44px;
+        padding: 0px 15px;
+        list-style: none;
+    }
+    .head_list ul li a{
+        color: #858585;
+    }
+    a{
+        text-decoration: none !important ;
+    }
+    .head_list ul li{
+        padding: 0 5px;
+        text-align: center;
+        font-size: 1.1em;
+    }
+    .page-header {
+        padding: 4px 18px;
+        margin: 40px 0 20px;
+        border-bottom: 0px solid #4E3838;
+    }
+    .head_list ul li:hover .page-header{
+        border-bottom: 1px solid #4E3838;
+    }
+    .head_list>ul{
+        border: none;
+    }
+    .nav_active{
+        border-bottom: 1px solid #4E3838;
+        color: #000 !important;
+        font-size: 1.1em;
+    }
+
+    a{
+        text-decoration: none !important;
+        color: #000;
+    }
+    .content {
+        background:#fff;
+        margin-top: 60px;
+        padding:20px;
+        /*border: 1px solid red;*/
+    }
+    ul{
+        border-bottom: 2px solid #e6e6e6;
+        float: left;
+        width: 100%;
+        padding: 0;
+    }
+    .sign_nav  li{
+        list-style: none;
+        float: left;
+        width: 150px;
+        text-align: center;
+        font-size: 1.3em;
+        padding-bottom: 5px;
+        position: relative;
+        top:2px;
+        margin-right: 5px;
+    }
+    .active{
+        border-bottom: 2px solid #828B9F;
+    }
+    .active a{
+        color: #828B9F !important ;
+    }
+    form{
+        padding:60px 2%;
+    }
+    label{
+        /*border: 1px solid red;*/
+        text-align:right;
+        padding-right: 10px;
+        width: 147px;
+        font-size: 17px;
+        font-weight: 500;
+    }
+    input{
+        width: 350px;
+        height: 43px;
+        border:1px solid  #E7E7E7;
+        border-radius: 3px;
+        margin: 10px 0;
+        padding-left: 5px;
+    }
+    .send_verify {
+        background: #828b9f;
+        padding: 10px;
+        color: #fff;
+        font-size: 1.1em;
+        border-radius: 3px;
+        margin-left: 10px;
+        border: none;
+    }
+    select{
+        width: 90px;
+        height: 40px;
+        padding-left:22px;
+        border:1px solid  #E7E7E7;
+        color: #939393;
+        font-size: 1.1em;
+        margin: 10px 0;
+    }
+    select[name="year"]{
+        padding-left: 8px;
+        margin-left: -4px;
+    }
+    select[name="job"]{
+        width: 110px;
+        text-align: center;
+    }
+    .for_area{
+        float:left;
+        margin: 10px 0;
+    }
+    textarea {
+        width: 70%;
+        resize: none;
+        border:1px solid  #E7E7E7;
+        border-radius: 3px;
+        margin: 10px 0;
+        padding-left: 5px;
+    }
+    .push_photo{
+        width: 170px;
+        height: 40px;
+        background: #828B9F;
+        color: #fff;
+        border-radius: 3px;
+        border: none;
+
+        /*border: 1px solid #E7E7E7;*/
+    }
+    form div{
+        float: left;
+        text-align: center;
+        line-height: 2.5;
+        position: relative;
+        margin-right:10px;
+    }
+    .head_photo{
+        width: 125px;
+        height: 125px;
+        border: 1px solid #E7E7E7;
+        margin: 9px 0;
+        margin-left: 4.5%;
+        overflow: hidden;
+    }
+    input[type="file"]{
+        width:170px;
+        position: absolute;
+        top: -11px;
+        left: 0;
+        opacity: 0;
+    }
+    input[type="checkbox"]{
+        width: 15px;
+        height: 15px;
+    }
+    input::-webkit-input-placeholder {
+        color: #fff;
+        padding: 0 47px;
+}
+    input:-moz-placeholder {
+        color: #fff;
+        padding: 0 47px;
+    }
+    input::-moz-placeholder {
+        color: #fff;
+        padding: 0 47px;
+    }
+    input:-ms-input-placeholder {
+        color: #fff;
+        padding: 0 47px;
+        }
+    br{
+        clear: both;
+    }
+    .des{
+        width: 60%;
+        text-align: inherit;
+        line-height: 1.5;
+        font-size: 1.1em;
+        color: #939393;
+        padding: 0 20px;
+    }
+    button[type="submit"]{
+        width: 300px;
+        height: 43px;
+        background: #ff9900;
+        color: #fff;
+        border: none;
+        font-size: 1.3em;
+        border-radius: 3px;
+        margin: 20px 0;
+    }
+    button[type="submit"]:hover{
+        background: #ef9400;
+    }
+    /*footer*/
+    .footer{
+        background-color: #353535;
+        padding: 50px 0;
+        clear:both;
+        padding-bottom: 0;
+    }
+    .footer ul{
+        border: none;
+    }
+    .footer ul li{
+        font-size: 1.1em;
+        color: #aaaaaa;
+        list-style: none;
+        line-height: 1.7;
+    }
+    .footer ul li a{
+        color: #aaaaaa;
+    }
+    .footer p{
+        margin: 0px;
+        color: #696969;
+        font-size: 12px;
+    }
+    .footer span{
+        color: #aaaaaa;
+        border-left: 1px solid #696969;
+        padding-left: 10px;
+        line-height: 40px;
+    }
+    .footer .logo{
+        padding: 15px 0px;
+        margin: 15px 0;
+        border-bottom: 1px solid #3f3f3f;
+    }
+    .footer .container div{
+        /**border: 1px solid red;*/
+        *width: 30%;
+    }
+    .footer .container .text-center{
+        /**border: 1px solid red;*/
+        *width: 100%;
+        *background-color: #353535;
+    }
+    .weixin{
+        cursor: pointer;
+    }
+    .showQc{
+        width: 100px;
+        visibility: hidden;
+        float: right;
+
+    }
+    .friend_link{
+        display: inline-block;padding: 0 5px
+    }
+    .friend_link>a{
+        color: #AAA;text-decoration: none;
+    }
+    .check{
+        color: #FF9900;display: none
+    }
+</style>
+{% end %}
+{% block mycontainer %}
+<div class="container content" >
+    <ul class="sign_nav " >
+        <li ><a href="/dimon/post/">小日子用户</a></li>
+        <li  class="active"><a href="/dimon/post/?sign=up">非小日子用户</a></li>
+    </ul>
+
+    <form action="/dimon/post/" class="form-horizontal" enctype="multipart/form-data"  method="post" onsubmit="return chkinput(this)" >
+        <span style="padding-left: 80px;font-size: 1.2em;color: #828B9F" >注册完成后，你可以使用注册手机号登陆小日子APP</span> <p></p>
+        <label for="id_customer-phone">手机号</label><input id="id_customer-phone" type="text" name="phone"  /><input type="button"  class="send_verify" id="send-verify" value="点击获取验证码" >
+        <span class="check phone_check">&nbsp;请输入正确的手机号码</span><br/>
+       
+        <label for="verify-input">动态码</label><input onblur="check(this,'verify_check')"  id="verify-input" type="text" name="checkcode" />  <span class="check verify_check">&nbsp;请输入动态码</span><br/>
+        <label for="id_customer-name">昵称</label><input onblur="check(this,'name_check')" id="id_customer-name" type="text" name="customer"  /><span class="check name_check">&nbsp;请输入昵称</span><br/>
+        <label for="id_customer-password">密码</label><input onblur="check(this,'password_check')" id="id_customer-password" type="password"/><span class="check password_check">&nbsp;请输入密码</span><br/>
+        <label for="id_customer-realname">真实姓名</label><input onblur="check(this,'realname_check')" id="id_customer-realname" type="text"/><span class="check realname_check">&nbsp;请输入真实姓名</span><br/>
+        <label for="id_customer-sex">性别</label><select id="id_customer-sex" name="sex" id="sex"><option value="1">男</option><option value="2">女</option></select><br/>
+        <label for="">生日</label>
+        <select name="year" ><option value="1">1970</option></select>
+        <select name="month" ><option value="1">1</option></select>
+        <select name="day" ><option value="1">1</option></select><br/>
+        <label for="id_customer-profession">职业</label><select  id="id_customer-profession" name="job" ><option value="1">学生</option><option value="2">在职</option><option value="3">自由职业</option></select><br/>
+        <label for="id_customer-email">邮箱</label><input  id="id_customer-email" type="text"/><span class="check email_check">&nbsp;请输入正确的邮箱</span><br/>
+        <label for="id_customer-wechat">微信号</label><input onblur="check(this,'wechat_check')" id="id_customer-wechat" type="text"/><span class="check wechat_check">&nbsp;请输入微信号</span><br/>
+        <label for="" class="for_area">爱好</label><textarea name="hobby" rows="5"></textarea><br/>
+
+        <label for="" class="for_area">头像</label><div><input type="text" id='textfield' class="push_photo" placeholder="上传头像"  >
+        <input type="file" id="fileField" onchange="previewImage(this)" />
+        
+        <br/>（一寸照片，正面）</div><div class="head_photo"><img id="imghead" width="100%"  alt=""/></div><br/>
+		
+		<div id="log"></div>
+		
+        <label for="">居住城市</label><input type="text"/><br/>
+        <label for="">探店城市</label><select name="live_city"><option value="1">重庆</option></select><br/>
+
+        <label for="" class="for_area">上传作品</label><div><input type="text" id='textfield1' class="push_photo" placeholder="选择文件"  >
+        <input type="file" id="fileField1" onchange="document.getElementById('textfield1').value=this.value" /></div>
+        <div class="des"  >必填项，将决定是否录取上传自己的文字作品（段落、文章、散文、微信软文等）和自己亲自拍摄的图片作品（小店图、场景图、细节图等），上传的作品不用太大否则将无法显示。</div><br/>
+
+        <label for="" class="for_area">简历</label><div><input type="text" id='textfield2' class="push_photo" placeholder="选择文件"  >
+        <input type="file" id="fileField2" onchange=" document.getElementById('textfield2').value=this.value" /></div>
+        <div class="des" style="line-height: 4" >word文档、PDF格式都可以</div><br/>
+
+        <label for="" class="for_area">备注</label><textarea name="remark" rows="5" placeholder="城市区域要求：熟悉区域和其它想对我们说的话，比如那些特别想探的店~" ></textarea><br/>
+        <label for="" class="for_area">投稿周期</label><textarea name="remark" rows="5" placeholder="一周两次" ></textarea><br/>
+        <label for="" class="for_area">招募信息获取途径</label><textarea name="remark" rows="2"  ></textarea><br/>
+        <label></label><input type="checkbox"/><span>我已阅读，并同意 <a href="/explorer/protocol"target="_blank"  style="text-decoration: underline!important;color: #337ab7" >《小日子用户使用协议》</a></span><br/>
+        <label></label><button type="submit" id="submit" >提交</button>
+        <input type="hidden" value="signUp"  name="func"  />
+        <input type="text" value=""  name="photo" id="photo"  />
+    </form>
+</div>
+{% end %}
+{% block myscript%}
+<link rel="stylesheet" href="">
+<script src="/js/bower_components/spark-md5/spark-md5.js" ></script>
+<script src="/js/bower_components/async/lib/async.js"></script>
+<script src="/js/lib/upyun-mu.js"></script>
+<script type="text/javascript">
+
+var config = {
+	bucket: 'oneday',
+	expiration: parseInt((new Date().getTime() + 3600000) / 1000),
+	form_api_secret:'WtrYV5XEjp46S0l+0fEsDPLS8is='
+};
+
+var instance = new Sand(config);
+var options = {
+	'notify_url': 'http://upyun.com',
+};
+
+instance.setOptions(options);
+
+function upfile(_id) {
+	var ext = '.' + document.getElementById(_id).files[0].name.split('.').pop();
+
+	instance.upload('/upload/file' + parseInt((new Date().getTime() + 3600000) / 1000) + ext,'#'+_id);
+};
+
+function addLog(data) {
+    
+    innerHtml=''
+    for (var key in data) {
+    	innerHtml+='<input type="text" value="' + data[key] + '"  name="' + key + '" id="' + key + '"  /></br>'
+    }
+    //alert(innerHtml)
+    $("#log").html(innerHtml)
+   
+}
+
+document.addEventListener('uploaded', function(e) {
+	
+	addLog(e.detail);
+});
+	
+	function previewImage(file)
+    {	
+		upfile(file.id)
+        document.getElementById('textfield').value=file.value
+        var MAXWIDTH  = 260;
+        var MAXHEIGHT = 180;
+        var div = document.getElementById('head_photo');
+        if (file.files && file.files[0])
+        {
+//            div.innerHTML ='<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.onload = function(){
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            img.width  =  rect.width;
+            img.height =  rect.height;
+//                 img.style.marginLeft = rect.left+'px';
+//                img.style.marginTop = rect.top+'px';
+            }
+            var reader = new FileReader();
+            reader.onload = function(evt){img.src = evt.target.result;}
+            reader.readAsDataURL(file.files[0]);
+        }
+        else //兼容IE
+        {
+            var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
+            file.select();
+            var src = document.selection.createRange().text;
+//            div.innerHTML = '<img id=imghead>';
+            var img = document.getElementById('imghead');
+            img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;
+            var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);
+            status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
+            div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
+        }
+    }
+    function clacImgZoomParam( maxWidth, maxHeight, width, height ){
+        var param = {top:0, left:0, width:width, height:height};
+        if( width>maxWidth || height>maxHeight )
+        {
+            rateWidth = width / maxWidth;
+            rateHeight = height / maxHeight;
+
+            if( rateWidth > rateHeight )
+            {
+                param.width =  maxWidth;
+                param.height = Math.round(height / rateWidth);
+            }else
+            {
+                param.width = Math.round(width / rateHeight);
+                param.height = maxHeight;
+            }
+        }
+
+        param.left = Math.round((maxWidth - param.width) / 2);
+        param.top = Math.round((maxHeight - param.height) / 2);
+        return param;
+    }
+    $("#id_customer-phone").blur(function(){
+        if($("#id_customer-phone").val().match(/0?(13|14|15|18|17)[0-9]{9}/)){
+            $(".phone_check").hide();
+        }else{
+            $(".phone_check").show();
+        }
+    })
+    function check(obj,id){
+        var c=document.getElementsByClassName(id)
+//        console.log(c[0])
+        if($(obj).val()==""){
+
+            $(c[0]).show();
+        }else{
+            $(c[0]).hide();
+        }
+    }
+    function send_verify_code(para) {
+		$.ajax({
+			url: "http://site.xiaorizi.me/dimon/post/",
+			type: "post",
+			data: {"phone": para.phone,
+				   //"csrfmiddlewaretoken": para.csrf,
+				   //"regi": ordefault(para.regi, null)
+				   "func":"checkcode",
+			},
+			dataType: "json",
+			async: false,
+			error: function() {
+				alert('验证码发送失败');
+			},
+			success: function(data) {
+				if (data.code != 1) {
+					alert(data.msg);
+				} else {
+					para.item.prop('disabled',true);
+					var time = 60;
+					var set = setInterval(function(){
+						para.item.val(time+"秒")
+						time--;
+						if(time==0){
+							para.item.prop('disabled', false);
+							time = 60;
+							para.item.val("点击重新获取验证码")
+							clearInterval(set)
+						}
+					}, 1000);
+				}
+			}
+		})
+	}
+	function ordefault(p, df) {
+		return typeof p !== 'undefined' ? p : df;
+	}    
+
+ 
+	$("#send-verify").on('click',function() {
+		var phone = $('#id_customer-phone').val();
+		if ( ! phone ) {
+			alert('手机号为空！')
+		} else {
+			var $this = $(this);
+			var para = {
+				phone: phone,
+				item: $this,
+			}
+			send_verify_code(para);
+		}
+	})
+</script>
+{% end %}

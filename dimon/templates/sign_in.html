@@ -217,11 +217,10 @@
         <li  class="active"><a href="/dimon/post/">小日子用户</a></li>
         <li><a href="/dimon/post/?sign=up">非小日子用户</a></li>
     </ul>
-    <form action="/dimon/post/" class="form-horizontal"  method="post"  >
-        <label for="phone_number" >手机号</label><input type="text" id="phone_number" name="phone" /><span class="phone_check" style="color: #FF9900;display: none" >&nbsp;请输入正确的手机号码</span><p></p>
-        <label for="checkcode" >验证码</label><input type="text" id="checkcode" name="checkcode"  /><span class="pass_check" style="color: #FF9900;display: none" >&nbsp;请输入密码</span> <p></p>
-        <input type="hidden" value="verify"  name="func"  />
-        <input id="send-verify" type="button" value="点击获取验证码">
+    <form action="" class="form-horizontal" >
+        <label for="phone_number" >手机号</label><input type="text" id="phone_number" /><span class="phone_check" style="color: #FF9900;display: none" >&nbsp;请输入正确的手机号码</span><p></p>
+        <label for="user_pass" >密码</label><input type="password" id="user_pass" /><span class="pass_check" style="color: #FF9900;display: none" >&nbsp;请输入密码</span> <p></p>
+        <span class="forget_psss" ><a href="" style="color: #A0A6B5" >忘记密码?</a></span><p></p>
         <button class="sub" type="submit">提交</button>
     </form>
 </div>
@@ -286,60 +285,6 @@
             $(".pass_check").hide()
         }
     })
- function send_verify_code(para) {
-		$.ajax({
-			url: "http://site.xiaorizi.me/dimon/post/",
-			type: "post",
-			data: {"phone": para.phone,
-				   //"csrfmiddlewaretoken": para.csrf,
-				   //"regi": ordefault(para.regi, null)
-				   "func":"checkcode",
-			},
-			dataType: "json",
-			async: false,
-			error: function() {
-				alert('验证码发送失败');
-			},
-			success: function(data) {
-				if (data.code != 1) {
-					alert(data.msg);
-				} else {
-					para.item.prop('disabled',true);
-					var time = 60;
-					var set = setInterval(function(){
-						para.item.val(time+"秒")
-						time--;
-						if(time==0){
-							para.item.prop('disabled', false);
-							time = 60;
-							para.item.val("点击重新获取验证码")
-							clearInterval(set)
-						}
-					}, 1000);
-				}
-			}
-		})
-	}
-	function ordefault(p, df) {
-		return typeof p !== 'undefined' ? p : df;
-	}    
-
- 
-	$("#send-verify").on('click',function() {
-		var phone = $('#phone_number').val();
-		if ( ! phone ) {
-			alert('手机号为空！')
-		} else {
-			var $this = $(this);
-			var para = {
-				phone: phone,
-				item: $this,
-			}
-			send_verify_code(para);
-		}
-	})
- 
-	
 </script>
 {% end %}
 </html>

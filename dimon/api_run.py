@@ -12,7 +12,8 @@ import tornadoredis
 
 from tornado.options import define, options
 
-from view_post import postHandler,showUserPostHandler
+from view_post import postHandler,dbCheck,mongotest
+
 
 define("memcache_ip", default="127.0.0.1:11211", help="memcache ip")
 define("mysql_host", default="10.10.1.163:3306", help="database host")
@@ -24,15 +25,20 @@ define("port", default=8888, help="run on the given port", type=int)
 class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
-                
+            
             (r"/dimon/post/",postHandler),
-            (r"/dimon/get/",showUserPostHandler),
+            #(r"/dimon/get/",showUserPostHandler),
+            (r"/dimon/check/",dbCheck),
+            (r"/dimon/mongotest/",mongotest),
+            
+            
+            
             
         ]
         
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
-            static_path=os.path.join(os.path.dirname(__file__), "static"),
+            static_path=os.path.join(os.path.dirname(__file__), "/"),
             api_title=u"xiaorizi  api",
             debug=True,
         )
@@ -45,6 +51,7 @@ class Application(tornado.web.Application):
             host=options.mysql_host, database=options.mysql_database,
             user=options.mysql_user, password=options.mysql_password)
         
+
 
 def main(port):
     tornado.options.parse_command_line()

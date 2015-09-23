@@ -162,7 +162,7 @@ class postHandler(baseHandler):
                 
                 raise tornado.gen.Return(self.on_response({"phone":phone},msg=u'验证成功',code=1))
         raise tornado.gen.Return(self.on_response({"phone":phone,"checkcode":checkcode},msg=u'验证失败！',code=0))
-    
+     
     @tornado.gen.coroutine
     def verify_code(self,checkcode,phone):
         if checkcode and phone:

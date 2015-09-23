@@ -214,7 +214,7 @@ def recommend(ev_id, city_name, tags, indexer):
 def download_file(request,template_name='download_file.html'):
     body={}
     body['ios']='https://itunes.apple.com/app/apple-store/id962602974?pt=117777698&ct=meitianqi&mt=8'
-    body['android']='http://pic1.qkan.com/app_file/2015-08-03/xiaorizi_2.3.6_c_HLmeitianq1438572965.apk'
+    body['android']='http://img1.xiaorizi.me/xiaorizi/xiaorizi.2.4.0_c_gw.apk'
     body['show'] = request.GET.get('show',False)
     
     return render_to_response(template_name,body,context_instance=RequestContext(request))

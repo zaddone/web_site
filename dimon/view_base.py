@@ -44,12 +44,16 @@ class baseHandler(tornado.web.RequestHandler):
         return self.return_callback_data(p)
 
     def return_style(self,template=None,_data={}):
-        if not template:
-            template=self.get_argument('template',None)
-        if template:
-            self.render(template, data = _data)
-        else:
+        json = self.get_argument('json',None)
+        if json:
             self.write(self.on_response(_data))
+        else:
+            if not template:
+                template=self.get_argument('template',None)
+            if template:
+                self.render(template, data = _data)
+            else:
+                self.write(self.on_response(_data))
     @property
     def db(self):
         return self.application.db
@@ -68,7 +72,12 @@ class baseHandler(tornado.web.RequestHandler):
 
     def get_json_info(self,json_str):
         return eval(json_str.encode('utf-8'), type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())
+    @tornado.gen.coroutine
+    def get_db_city(self,usetype=1):
 
+        sql='SELECT `district_id`,`district_name`,`title` FROM `sys_new_district` WHERE `usetype`= %d' % usetype
+
+        return self.db.query(sql)
 
     @tornado.gen.coroutine
     def SendOrderMsg(self,phone=None,msg=''):

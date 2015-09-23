@@ -26,37 +26,6 @@ email_queue = MongoDbEmailQueue(
     queue_maxsize=0
 )
 
-class mongotest(baseHandler):
-    def get(self):
-
-        # Put new email in the queue for processing
-        # by the mailer worker at the scheduled time.
-        email_queue.sendmail(
-            subject='Hello World Sample',
-            from_addr=smtp_user,
-            to_addrs=recipient_addrs,
-            text='Greetings from Tornado Email Queue.',
-            mime_type='plain',
-            charset='utf-8',
-            scheduled_hours_from_now=0
-        )
-
-        # Render a tornado html template and put it in the queue
-        # for processing by the mailer worker at the scheduled time.
-        email_queue.sendmail_from_template(
-            subject='Tornado Templates Sample',
-            from_addr=smtp_user,
-            to_addrs=recipient_addrs,
-            template_path='templates/email.html',
-            params={'link': 'http://ricardoyorky.github.io/emailqueue/'},
-            mime_type='html',
-            charset='utf-8',
-            scheduled_hours_from_now=0
-        )
-
-        self.write("Mail sent")
-    
-
 class dbCheck(baseHandler):
     @tornado.gen.coroutine
     def get(self):
@@ -68,7 +37,8 @@ class dbCheck(baseHandler):
             
             self.write(self.on_response(arr,msg='Request is successful',code=0))
         else:
-            self.return_style(template='sign_in.html',_data=[])
+            self.return_style(template='sign_in.html',_data={})
+
     @tornado.gen.coroutine
     def keysList(self,**kwargs):
         #signup_
@@ -78,7 +48,7 @@ class dbCheck(baseHandler):
             keys_list = yield tornado.gen.Task(self.redis_cache.keys, '%s_*' % str(keys_name))
             raise tornado.gen.Return(keys_list)
         raise tornado.gen.Return(keys_list)
-    
+
     @tornado.gen.coroutine
     def getKeysList(self,*args):
         db_list=[]
@@ -91,35 +61,51 @@ class dbCheck(baseHandler):
         raise tornado.gen.Return(db_list)
     
 class postHandler(baseHandler):
-    
+    @tornado.gen.coroutine
     def get(self):
         sign = self.get_arguments('sign') 
+        _da={}
+
         if len(sign)>0:
             if sign[0]=='up':
-                self.return_style(template='sign_up.html',_data=[])
-            elif  sign[0]=='verify':
-                self.return_style(template='verify.html',_data=[])
+                _da['city']=yield self.get_db_city()
+            phone =  self.get_arguments('phone')
+            if len(phone) > 0:
+                _da['phone']=phone[0]
+                try:
+                    ver = yield tornado.gen.Task(self.redis_cache.get, 'signin_%s' % str(_da['phone']))
+                except:
+                    ver = None
+                test =  self.get_arguments('test')
+                if ver or len(test):
+                    try:
+                        _da['info']=  yield self.keysShow('signup_%s' % str(_da['phone']))
+                    except:
+                        pass
+            _template ='%s.html' % sign[0]
+            self.return_style(template=_template , _data=_da)
+        else:
+            self.return_style(template='verify.html',_data={})   
 
-        self.return_style(template='sign_in.html',_data=[])   
-        #self.render("post_page.html", entries=[])
-        
-    #@tornado.web.asynchronous
-    #@tornado.gen.engine
+
     @tornado.gen.coroutine
     def post(self):
         self.set_header("Content-Type", "text/plain")
+        post_data = self.get_arg()
+
+        
+        k =yield self.post_function(post_data,func=post_data.pop('func'))
+
+        self.write(k)
+
+    def get_arg(self):
         post_data = {}
         for key in self.request.arguments:
             value=self.get_arguments(key) 
             post_data[key] = value if len(value)>1 else value[0]     
             if type(post_data[key])==int and post_data[key].isdigit():
                 post_data[key]=int(post_data[key])
-        
-        k =yield self.post_function(post_data,func=post_data.pop('func'))
-
-        self.write(k)
-
-    
+        return post_data
 
     @tornado.gen.coroutine
     def Handle_checkcode(self,**kwargs):
@@ -144,6 +130,16 @@ class postHandler(baseHandler):
                 
         else:
             raise tornado.gen.Return(self.on_response({},msg=u'手机号为空',code=0))
+    @tornado.gen.coroutine
+    def keysShow(self,keys_name):
+        #signup_
+        #keys_name =  kwargs.get('keys_show',None)
+        keys_list={}
+        if keys_name:
+            keys_list = yield tornado.gen.Task(self.redis_cache.get, '%s' % str(keys_name))
+                        
+            raise tornado.gen.Return(json.loads(keys_list))
+        raise tornado.gen.Return(keys_list)
     
     @tornado.gen.coroutine
     def Handle_verify(self,**kwargs): 
@@ -157,6 +153,13 @@ class postHandler(baseHandler):
             res = yield tornado.gen.Task(self.redis_cache.delete, key_name)
             '''
             if res:
+                
+                _val = yield self.keysShow('signup_%s' % str(phone))
+                if _val:
+                    ver = yield tornado.gen.Task(self.redis_cache.set, 'signin_%s' % str(phone),str(time.time()),24*3600)
+                    
+                    raise tornado.gen.Return(self.on_response(_val,msg=u'登录成功',code=1))
+                
                 raise tornado.gen.Return(self.on_response({"phone":phone},msg=u'验证成功',code=1))
         raise tornado.gen.Return(self.on_response({"phone":phone,"checkcode":checkcode},msg=u'验证失败！',code=0))
     
@@ -174,7 +177,6 @@ class postHandler(baseHandler):
     @tornado.gen.coroutine
     def Handle_signUp(self,**kwargs):
 
-        #key_val={}
         checkcode =  kwargs.pop('checkcode')
         
         if not checkcode:
@@ -194,79 +196,23 @@ class postHandler(baseHandler):
                 res = yield tornado.gen.Task(self.redis_cache.set, key_name,json.dumps(kwargs),3600*24*30)
                 #self.cache.set(key_name,kwargs,3600*24*30)
                 if res:
+                    mail_subject = u'体验师提交简历通知-%s-%s'
+                    #mail_content = u'见标题'
+                    kwargs.update({'link': 'http://xiaorizi.me'})
+                    yield email_queue.sendmail_from_template(
+                                subject=mail_subject,
+                                from_addr=smtp_user,
+                                to_addrs=recipient_addrs,
+                                template_path='/data/web/web_test/life_site/dimon/templates/resume_email.html',
+                                params=kwargs,
+                                mime_type='html',
+                                charset='utf-8',
+                                scheduled_hours_from_now=0)
                     
-                    raise tornado.gen.Return( self.on_response(kwargs,msg='Request is successful,Email err',code=1))
-        
+                    raise tornado.gen.Return( self.on_response(kwargs,msg='Request is successful',code=1))
 
-        mail_host = 'smtp.exmail.qq.com'
-        mail_user = 'zl.feng@xiaorizi.me'
-        mail_pass = '520512fzl520512'
-
-        #mail_subject = u'体验师提交简历通知-%s-%s' %(e_model.name, e_model.nickname)
-        mail_subject = u'体验师提交简历通知-%s-%s'
-        mail_content = u'见标题'
-        mail_to = ('252925359@qq.com', )
-        #email_send = self.send_mail(mail_subject, mail_content, mail_to, mail_host, mail_user, mail_pass)
-        
-        sendM =yield email_queue.sendmail(
-                    subject=mail_subject,
-                    from_addr=smtp_user,
-                    to_addrs=recipient_addrs,
-                    text=mail_content,
-                    mime_type='plain',
-                    charset='utf-8',
-                    scheduled_hours_from_now=0
-                )
-        '''
-        sendM = yield tornado.gen.Task(email_queue.sendmail,subject=mail_subject,
-                    from_addr=smtp_user,
-                    to_addrs=mail_to,
-                    text=mail_content,
-                    mime_type='plain',
-                    charset='utf-8',
-                    scheduled_hours_from_now=0)
-        '''
-        #if sendM:
-        #if email_send:
-        raise tornado.gen.Return( self.on_response(kwargs,msg='Email request is successful %s' % sendM,code=1))
-        
-        
         raise tornado.gen.Return( self.on_response(kwargs,msg='Request is fail',code=0))
     
-    
-    '''
-    def Handle_userpost(self,**kwargs):
-        _code = 1
-        _msg='Request is successful'
-        max_len=10
-        if 'userid' in kwargs:
-            user_key=self.make_key(kwargs['userid'])
-            user_dict =self.cache.get(user_key)
-            if type(user_dict)!=dict:
-                user_dict={}
-            
-            time_s =str(int(time.time()))
-            if time_s in user_dict:
-                _code = 0
-                _msg = "High frequency operation"
-            user_dict[str(int(time.time()))]=kwargs
-            
-            if len(user_dict)>max_len:
-                _code = 0
-                _msg =  "Submit a number of caps"
-            else:
-                try:
-                    self.cache.set(user_key,user_dict,3600*24*30)
-                except Exception,e:
-                    _code = 0
-                    _msg =  "memcache err: %s " % str(e)
-        else:
-            user_dict={}
-            _code = 0
-            _msg ="key userid not in arguments"
-            #self.cache.set(self.make_key(key),post_data,3600*24*7)
-        return self.on_response(user_dict,msg=_msg,code=_code)
-    '''
     @tornado.gen.coroutine
     def post_function(self,post_data,func=''):
         

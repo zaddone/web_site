@@ -292,33 +292,33 @@
 {% block mycontainer %}
 <div class="container content" >
     <ul class="sign_nav " >
-        <li ><a href="/dimon/post/">å°æ—¥å­ç”¨æˆ·</a></li>
-        <li  class="active"><a href="/dimon/post/?sign=up">éå°æ—¥å­ç”¨æˆ·</a></li>
+        <li ><a href="/dimon/post/">Ğ¡ÈÕ×ÓÓÃ»§</a></li>
+        <li  class="active"><a href="/dimon/post/?sign=up">·ÇĞ¡ÈÕ×ÓÓÃ»§</a></li>
     </ul>
 
     <form action="/dimon/post/" class="form-horizontal" enctype="multipart/form-data"  method="post" onsubmit="return chkinput(this)" >
-        <span style="padding-left: 80px;font-size: 1.2em;color: #828B9F" >æ³¨å†Œå®Œæˆåï¼Œä½ å¯ä»¥ä½¿ç”¨æ³¨å†Œæ‰‹æœºå·ç™»é™†å°æ—¥å­APP</span> <p></p>
-        <label for="id_customer-phone">æ‰‹æœºå·</label><input id="id_customer-phone" type="text" name="phone"  /><input type="button"  class="send_verify" id="send-verify" value="ç‚¹å‡»è·å–éªŒè¯ç " >
-        <span class="check phone_check">&nbsp;è¯·è¾“å…¥æ­£ç¡®çš„æ‰‹æœºå·ç </span><br/>
+        <span style="padding-left: 80px;font-size: 1.2em;color: #828B9F" >×¢²áÍê³Éºó£¬Äã¿ÉÒÔÊ¹ÓÃ×¢²áÊÖ»úºÅµÇÂ½Ğ¡ÈÕ×ÓAPP</span> <p></p>
+        <label for="id_customer-phone">ÊÖ»úºÅ</label><input id="id_customer-phone" type="text" name="phone"  /><input type="button"  class="send_verify" id="send-verify" value="µã»÷»ñÈ¡ÑéÖ¤Âë" >
+        <span class="check phone_check">&nbsp;ÇëÊäÈëÕıÈ·µÄÊÖ»úºÅÂë</span><br/>
        
-        <label for="verify-input">åŠ¨æ€ç </label><input  id="verify-input" type="text" name="checkcode" />  <span class="check verify_check">&nbsp;éªŒè¯ç é”™è¯¯</span><br/>
-        <label for="id_customer-name">æ˜µç§°</label><input onblur="check(this,'name_check')" id="id_customer-name" type="text" name="customer"  /><span class="check name_check">&nbsp;è¯·è¾“å…¥æ˜µç§°</span><br/>
-        <!--<label for="id_customer-password">å¯†ç </label><input onblur="check(this,'password_check')" id="id_customer-password" type="password"/><span class="check password_check">&nbsp;è¯·è¾“å…¥å¯†ç </span><br/>-->
-        <label for="id_customer-realname">çœŸå®å§“å</label><input onblur="check(this,'realname_check')" id="id_customer-realname" type="text"/><span class="check realname_check">&nbsp;è¯·è¾“å…¥çœŸå®å§“å</span><br/>
-        <label for="id_customer-sex">æ€§åˆ«</label><select id="id_customer-sex" name="sex" id="sex"><option value="1">ç”·</option><option value="2">å¥³</option></select><br/>
-        <label for="">ç”Ÿæ—¥</label>
+        <label for="verify-input">¶¯Ì¬Âë</label><input  id="verify-input" type="text" name="checkcode" />  <span class="check verify_check">&nbsp;ÑéÖ¤Âë´íÎó</span><br/>
+        <label for="id_customer-name">êÇ³Æ</label><input onblur="check(this,'name_check')" id="id_customer-name" type="text" name="customer"  /><span class="check name_check">&nbsp;ÇëÊäÈëêÇ³Æ</span><br/>
+        <!--<label for="id_customer-password">ÃÜÂë</label><input onblur="check(this,'password_check')" id="id_customer-password" type="password"/><span class="check password_check">&nbsp;ÇëÊäÈëÃÜÂë</span><br/>-->
+        <label for="id_customer-realname">ÕæÊµĞÕÃû</label><input onblur="check(this,'realname_check')" id="id_customer-realname" type="text"/><span class="check realname_check">&nbsp;ÇëÊäÈëÕæÊµĞÕÃû</span><br/>
+        <label for="id_customer-sex">ĞÔ±ğ</label><select id="id_customer-sex" name="sex" id="sex"><option value="1">ÄĞ</option><option value="2">Å®</option></select><br/>
+        <label for="">ÉúÈÕ</label>
         <select name="year" ></select>
         <select name="month" ></select>
         <select name="day" ></select><br/>
-        <label for="id_customer-profession">èŒä¸š</label><select  id="id_customer-profession" name="job" ><option value="1">å­¦ç”Ÿ</option><option value="2">åœ¨èŒ</option><option value="3">è‡ªç”±èŒä¸š</option></select><br/>
-        <label for="id_customer-email">é‚®ç®±</label><input  id="id_customer-email" type="text"/><span class="check email_check">&nbsp;è¯·è¾“å…¥æ­£ç¡®çš„é‚®ç®±</span><br/>
-        <label for="id_customer-wechat">å¾®ä¿¡å·</label><input onblur="check(this,'wechat_check')" id="id_customer-wechat" type="text"/><span class="check wechat_check">&nbsp;è¯·è¾“å…¥å¾®ä¿¡å·</span><br/>
-        <label for="" class="for_area">çˆ±å¥½</label><textarea name="hobby" rows="5"></textarea><br/>
+        <label for="id_customer-profession">Ö°Òµ</label><select  id="id_customer-profession" name="job" ><option value="1">Ñ§Éú</option><option value="2">ÔÚÖ°</option><option value="3">×ÔÓÉÖ°Òµ</option></select><br/>
+        <label for="id_customer-email">ÓÊÏä</label><input  id="id_customer-email" type="text"/><span class="check email_check">&nbsp;ÇëÊäÈëÕıÈ·µÄÓÊÏä</span><br/>
+        <label for="id_customer-wechat">Î¢ĞÅºÅ</label><input onblur="check(this,'wechat_check')" id="id_customer-wechat" type="text"/><span class="check wechat_check">&nbsp;ÇëÊäÈëÎ¢ĞÅºÅ</span><br/>
+        <label for="" class="for_area">°®ºÃ</label><textarea name="hobby" rows="5"></textarea><br/>
 
-        <label for="textfield" class="for_area">å¤´åƒ</label><div><input type="text" id='textfield' class="push_photo" placeholder="ä¸Šä¼ å¤´åƒ"  >
+        <label for="textfield" class="for_area">Í·Ïñ</label><div><input type="text" id='textfield' class="push_photo" placeholder="ÉÏ´«Í·Ïñ"  >
         <input type="file" id="fileField" name="headphoto" onchange="previewImage(this)" />
         
-        <br/>ï¼ˆä¸€å¯¸ç…§ç‰‡ï¼Œæ­£é¢ï¼‰</div><div class="head_photo"><img id="imghead" width="100%"  alt=""/></div><br/>
+        <br/>£¨Ò»´çÕÕÆ¬£¬ÕıÃæ£©</div><div class="head_photo"><img id="imghead" width="100%"  alt=""/></div><br/>
 
         <div id="photo_value"></div>
         <div id="production_value"></div>
@@ -326,28 +326,28 @@
 
         <!--<input type="text" name=""/>-->
 		
-        <label for="">å±…ä½åŸå¸‚</label><input type="text"/><br/>
-        <label for="">æ¢åº—åŸå¸‚</label><select name="live_city">
+        <label for="">¾Ó×¡³ÇÊĞ</label><input type="text"/><br/>
+        <label for="">Ì½µê³ÇÊĞ</label><select name="live_city">
         {% for ci in data['city'] %}
         <option value="{{ci['district_name']}}">{{ci['district_name']}}</option>
         {% end %}
         
         </select><br/>
 
-        <label for="textfield1" class="for_area">ä¸Šä¼ ä½œå“</label><div><input type="text" id='textfield1'  class="push_photo" placeholder="é€‰æ‹©æ–‡ä»¶"  >
+        <label for="textfield1" class="for_area">ÉÏ´«×÷Æ·</label><div><input type="text" id='textfield1'  class="push_photo" placeholder="Ñ¡ÔñÎÄ¼ş"  >
         <input type="file" name="production" id="fileField1" onchange="previewFile(this,'textfield1')"/></div>
-        <div class="des"  >å¿…å¡«é¡¹ï¼Œå°†å†³å®šæ˜¯å¦å½•å–ä¸Šä¼ è‡ªå·±çš„æ–‡å­—ä½œå“ï¼ˆæ®µè½ã€æ–‡ç« ã€æ•£æ–‡ã€å¾®ä¿¡è½¯æ–‡ç­‰ï¼‰å’Œè‡ªå·±äº²è‡ªæ‹æ‘„çš„å›¾ç‰‡ä½œå“ï¼ˆå°åº—å›¾ã€åœºæ™¯å›¾ã€ç»†èŠ‚å›¾ç­‰ï¼‰ï¼Œä¸Šä¼ çš„ä½œå“ä¸ç”¨å¤ªå¤§å¦åˆ™å°†æ— æ³•æ˜¾ç¤ºã€‚</div><br/>
+        <div class="des"  >±ØÌîÏî£¬½«¾ö¶¨ÊÇ·ñÂ¼È¡ÉÏ´«×Ô¼ºµÄÎÄ×Ö×÷Æ·£¨¶ÎÂä¡¢ÎÄÕÂ¡¢É¢ÎÄ¡¢Î¢ĞÅÈíÎÄµÈ£©ºÍ×Ô¼ºÇ××ÔÅÄÉãµÄÍ¼Æ¬×÷Æ·£¨Ğ¡µêÍ¼¡¢³¡¾°Í¼¡¢Ï¸½ÚÍ¼µÈ£©£¬ÉÏ´«µÄ×÷Æ·²»ÓÃÌ«´ó·ñÔò½«ÎŞ·¨ÏÔÊ¾¡£</div><br/>
 
-        <label for="textfield2" class="for_area">ç®€å†</label><div><input type="text" id='textfield2'  class="push_photo" placeholder="é€‰æ‹©æ–‡ä»¶"  >
+        <label for="textfield2" class="for_area">¼òÀú</label><div><input type="text" id='textfield2'  class="push_photo" placeholder="Ñ¡ÔñÎÄ¼ş"  >
         <input type="file" name="resume" id="fileField2" onchange="previewFile(this,'textfield2')" /></div>
-        <div class="des" style="line-height: 4" >wordæ–‡æ¡£ã€PDFæ ¼å¼éƒ½å¯ä»¥</div><br/>
+        <div class="des" style="line-height: 4" >wordÎÄµµ¡¢PDF¸ñÊ½¶¼¿ÉÒÔ</div><br/>
 
-        <label for="" class="for_area">å¤‡æ³¨</label><textarea name="remark" rows="5" placeholder="åŸå¸‚åŒºåŸŸè¦æ±‚ï¼šç†Ÿæ‚‰åŒºåŸŸå’Œå…¶å®ƒæƒ³å¯¹æˆ‘ä»¬è¯´çš„è¯ï¼Œæ¯”å¦‚é‚£äº›ç‰¹åˆ«æƒ³æ¢çš„åº—~" ></textarea><br/>
-        <label for="" class="for_area">æŠ•ç¨¿å‘¨æœŸ</label><textarea name="remark" rows="5" placeholder="ä¸€å‘¨ä¸¤æ¬¡" ></textarea><br/>
-        <label for="" class="for_area">æ‹›å‹Ÿä¿¡æ¯è·å–é€”å¾„</label><textarea name="remark" rows="2"  ></textarea><br/>
-        <label></label><input type="checkbox" name="agree"/><span>æˆ‘å·²é˜…è¯»ï¼Œå¹¶åŒæ„ <a href="/explorer/protocol"target="_blank"  style="text-decoration: underline!important;color: #337ab7" >ã€Šå°æ—¥å­ç”¨æˆ·ä½¿ç”¨åè®®ã€‹</a></span><br/>
+        <label for="" class="for_area">±¸×¢</label><textarea name="remark" rows="5" placeholder="³ÇÊĞÇøÓòÒªÇó£ºÊìÏ¤ÇøÓòºÍÆäËüÏë¶ÔÎÒÃÇËµµÄ»°£¬±ÈÈçÄÇĞ©ÌØ±ğÏëÌ½µÄµê~" ></textarea><br/>
+        <label for="" class="for_area">Í¶¸åÖÜÆÚ</label><textarea name="remark" rows="5" placeholder="Ò»ÖÜÁ½´Î" ></textarea><br/>
+        <label for="" class="for_area">ÕĞÄ¼ĞÅÏ¢»ñÈ¡Í¾¾¶</label><textarea name="remark" rows="2"  ></textarea><br/>
+        <label></label><input type="checkbox" name="agree"/><span>ÎÒÒÑÔÄ¶Á£¬²¢Í¬Òâ <a href="/explorer/protocol"target="_blank"  style="text-decoration: underline!important;color: #337ab7" >¡¶Ğ¡ÈÕ×ÓÓÃ»§Ê¹ÓÃĞ­Òé¡·</a></span><br/>
         <label></label>
-        <button type="button" id="submit" >æäº¤</button>
+        <button type="button" id="submit" >Ìá½»</button>
         <input type="hidden" value="signUp"  name="func"  />
         <input type="text" value=""  name="photo" id="photo"  />
     </form>
@@ -359,7 +359,7 @@
 <script src="/js/bower_components/async/lib/async.js"></script>
 <script src="/js/lib/upyun-mu.js"></script>
 <script type="text/javascript">
-//ä¸Šä¼ æ–‡ä»¶
+//ÉÏ´«ÎÄ¼ş
     var config = {
         bucket: 'oneday',
         expiration: parseInt((new Date().getTime() + 3600000) / 1000),
@@ -384,7 +384,7 @@
     $(m_value).html(innerHtml)
    
 }
-//å¤´åƒä¸Šä¼ 
+//Í·ÏñÉÏ´«
     var c;
     $("#fileField").click(function (){
         c=0;
@@ -427,7 +427,7 @@
             reader.onload = function(evt){img.src = evt.target.result;}
             reader.readAsDataURL(file.files[0]);
         }
-        else //å…¼å®¹IE
+        else //¼æÈİIE
         {
             var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';
             file.select();
@@ -462,14 +462,14 @@
         param.top = Math.round((maxHeight - param.height) / 2);
         return param;
     }
-//ä½œå“ä¸Šä¼ 
+//×÷Æ·ÉÏ´«
     function previewFile(file,id){
         document.getElementById(id).value=file.value;
         upfile(file.id);
     }
-//ç”Ÿæˆå¹´æœˆæ—¥
+//Éú³ÉÄêÔÂÈÕ
     var myDate = new Date();
-    var Year=myDate.getFullYear(); //è·å–å½“å‰å¹´ä»½
+    var Year=myDate.getFullYear(); //»ñÈ¡µ±Ç°Äê·İ
     for(var i=1970;i<=Year;i++){
         $("select[name='year']").append("<option value='"+i+"'>"+i+"</option>")
     }
@@ -479,7 +479,7 @@
     for(var i=1;i<=31;i++){
         $("select[name='day']").append("<option value='"+i+"'>"+i+"</option>")
     }
-//éªŒè¯
+//ÑéÖ¤
     $("input[name='agree']").change(function (){
         if($("input[name='agree']")[0].checked){
             $("#submit").css({background:"#ff9900"});
@@ -528,7 +528,7 @@
 			dataType: "json",
 			async: false,
 			error: function() {
-				alert('éªŒè¯ç å‘é€å¤±è´¥');
+				alert('ÑéÖ¤Âë·¢ËÍÊ§°Ü');
 			},
 			success: function(data) {
 				if (data.code != 1) {
@@ -537,12 +537,12 @@
 					para.item.prop('disabled',true);
 					var time = 60;
 					var set = setInterval(function(){
-						para.item.val(time+"ç§’")
+						para.item.val(time+"Ãë")
 						time--;
 						if(time==0){
 							para.item.prop('disabled', false);
 							time = 60;
-							para.item.val("ç‚¹å‡»é‡æ–°è·å–éªŒè¯ç ")
+							para.item.val("µã»÷ÖØĞÂ»ñÈ¡ÑéÖ¤Âë")
 							clearInterval(set)
 						}
 					}, 1000);
@@ -556,7 +556,7 @@
 	$("#send-verify").on('click',function() {
 		var phone = $('#id_customer-phone').val();
 		if ( ! phone ) {
-			alert('æ‰‹æœºå·ä¸ºç©ºï¼')
+			alert('ÊÖ»úºÅÎª¿Õ£¡')
 		} else {
 			var $this = $(this);
 			var para = {
@@ -566,7 +566,7 @@
 			send_verify_code(para);
 		}
 	})
-    //éªŒè¯ç çš„æ ¡éªŒ
+    //ÑéÖ¤ÂëµÄĞ£Ñé
     $("#verify-input").blur(function() {
         $.ajax({
             url: "http://site.xiaorizi.me/dimon/post/",
@@ -595,7 +595,7 @@
         })
     })
 
-    //æäº¤
+    //Ìá½»
     $("#submit").click(function (){
         var count=0;
         if($("input[name='agree']")[0].checked){
